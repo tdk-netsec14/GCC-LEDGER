@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./data/gcc_ledger.db"
     vector_index_path: str = "./data/vector_index"
     openai_api_key: str | None = None
+    openai_model: str = "gpt-4o"
     admin_jwt_secret: str = "development-only-change-me-minimum-32-bytes-secret-key"
     daily_llm_budget_usd: Decimal = Decimal("5.00")
     fetch_user_agent: str = "GCC-Ledger/0.1"
@@ -30,3 +31,6 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+settings = get_settings()
