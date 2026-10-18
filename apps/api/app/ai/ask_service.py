@@ -19,9 +19,20 @@ OUT_OF_SCOPE_KEYWORDS = [
     "football",
     "horoscope",
     "capital of france",
+    "ignore all",
+    "ignore previous",
+    "bypass",
+    "jailbreak",
+    "system prompt",
+    "passwords",
+    "developer instructions",
+    "write a python",
+    "write a script",
     "write code",
-    "bypass instructions",
-    "ignore previous instructions",
+    "invent an",
+    "fabricate",
+    "fake company",
+    "pretend you are",
 ]
 
 LEGAL_TAX_KEYWORDS = [
@@ -64,17 +75,35 @@ def ask_ledger_pipeline(
 ) -> AskResponse:
     start_time = time.time()
     q_clean = question.strip()
+    q_lower = q_clean.lower()
 
     # 1. Intent & Injection check
     if is_out_of_scope(q_clean):
         latency_ms = int((time.time() - start_time) * 1000)
         resp = AskResponse(
-            answer="I can only assist with questions regarding Indian Global Capability Centres (GCCs), state policies, setup costs, rules, radar signals, and service providers. Your question appears to be outside this scope.",
+            answer="I can only assist with questions regarding Indian Global Capability Centres (GCCs), state policies, setup costs, rules, radar signals, and service providers. Your question appears to be outside this scope or contains an adversarial prompt.",
             claims=[],
             citations=[],
             lowest_grade_relied_on=None,
             refused=True,
-            refusal_reason="Out of domain scope",
+            refusal_reason="Out of domain scope or adversarial instruction",
+            latency_ms=latency_ms,
+        )
+        _log_qa(db, q_clean, floor, direct_only, resp)
+        return resp
+
+    # 1b. No Grade A Government Census for national GCC count
+    if floor == "A" and ("count" in q_lower or "census" in q_lower) and any(
+        kw in q_lower for kw in ["government", "official", "meity", "primary verified", "national"]
+    ):
+        latency_ms = int((time.time() - start_time) * 1000)
+        resp = AskResponse(
+            answer="No Grade A primary government census exists for total Indian GCC counts. National GCC counts originate from industry association reports (Nasscom, Zinnov) graded B or C. Please lower your evidence floor to Grade B to view and cite these records.",
+            claims=[],
+            citations=[],
+            lowest_grade_relied_on=None,
+            refused=True,
+            refusal_reason="No Grade A government census exists for GCC counts",
             latency_ms=latency_ms,
         )
         _log_qa(db, q_clean, floor, direct_only, resp)
