@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Target India",
+    "hq_country": "United States",
+    "sector": "Retail",
+    "captive_status": "yes",
+    "captive_reason": "Wholly owned subsidiary of Target Corporation delivering internal tech, supply chain, and merchandising operations."
+  },
+  {
+    "id": 2,
+    "name": "Wells Fargo India Solutions",
+    "hq_country": "United States",
+    "sector": "Financial Services",
+    "captive_status": "yes",
+    "captive_reason": "Direct captive entity supporting technology, risk, and operations for Wells Fargo parent group."
+  },
+  {
+    "id": 3,
+    "name": "Goldman Sachs Services India",
+    "hq_country": "United States",
+    "sector": "Financial Services",
+    "captive_status": "yes",
+    "captive_reason": "Global center supporting investment banking engineering, quantitative modeling, and risk."
+  },
+  {
+    "id": 4,
+    "name": "Walmart Global Tech India",
+    "hq_country": "United States",
+    "sector": "Retail & E-Commerce",
+    "captive_status": "yes",
+    "captive_reason": "In-house software engineering and retail tech innovation division for Walmart Inc."
+  },
+  {
+    "id": 5,
+    "name": "Bosch Global Software Technologies",
+    "hq_country": "Germany",
+    "sector": "Engineering & Automotive",
+    "captive_status": "yes",
+    "captive_reason": "Captive R&D and mobility engineering powerhouse for the Bosch Group worldwide."
+  },
+  {
+    "id": 6,
+    "name": "Shell Information Technology Centre",
+    "hq_country": "United Kingdom",
+    "sector": "Energy",
+    "captive_status": "yes",
+    "captive_reason": "Dedicated technology center handling digital solutions, subsurface data, and enterprise systems."
+  },
+  {
+    "id": 7,
+    "name": "Novartis Healthcare",
+    "hq_country": "Switzerland",
+    "sector": "Pharmaceuticals",
+    "captive_status": "yes",
+    "captive_reason": "Novartis Corporate Center managing clinical trials, data science, and shared business services."
+  },
+  {
+    "id": 8,
+    "name": "Boeing India",
+    "hq_country": "United States",
+    "sector": "Aerospace & Defense",
+    "captive_status": "yes",
+    "captive_reason": "Boeing India Engineering & Technology Center delivering advanced aerospace R&D."
+  },
+  {
+    "id": 9,
+    "name": "Barclays Global Service Centre",
+    "hq_country": "United Kingdom",
+    "sector": "Financial Services",
+    "captive_status": "yes",
+    "captive_reason": "Shared technology and operations centre owned by Barclays Bank PLC."
+  },
+  {
+    "id": 10,
+    "name": "Siemens Technology India",
+    "hq_country": "Germany",
+    "sector": "Industrial Automation",
+    "captive_status": "yes",
+    "captive_reason": "Corporate technology research and development unit exclusively serving Siemens operating companies."
+  },
+  {
+    "id": 11,
+    "name": "Tata Consultancy Services",
+    "hq_country": "India",
+    "sector": "IT Services & Consulting",
+    "captive_status": "no",
+    "captive_reason": "Global third-party IT services provider delivering contracted software development and outsourcing to external clients; not an in-house captive."
+  },
+  {
+    "id": 12,
+    "name": "Infosys Limited",
+    "hq_country": "India",
+    "sector": "IT Services & Consulting",
+    "captive_status": "no",
+    "captive_reason": "Third-party digital services and consulting corporation delivering vendor solutions to commercial clients; not a captive GCC."
+  },
+  {
+    "id": 13,
+    "name": "Wipro Limited",
+    "hq_country": "India",
+    "sector": "IT Services & Consulting",
+    "captive_status": "no",
+    "captive_reason": "Third-party technology services provider; maintains multi-client delivery centers across India."
+  },
+  {
+    "id": 14,
+    "name": "Cognizant Technology Solutions India",
+    "hq_country": "United States",
+    "sector": "IT Services & BPO",
+    "captive_status": "no",
+    "captive_reason": "Third-party IT consultancy and multi-tenant business process services vendor for commercial third parties."
+  },
+  {
+    "id": 15,
+    "name": "Nordic Life Science Hub",
+    "hq_country": "Sweden",
+    "sector": "Biotechnology",
+    "captive_status": "unreviewed",
+    "captive_reason": "Newly submitted directory lead under review by intelligence operations team."
+  }
+]

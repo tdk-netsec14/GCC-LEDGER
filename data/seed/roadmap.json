@@ -1,0 +1,98 @@
+[
+  {
+    "step_number": 1,
+    "title": "Foreign Investment Route & Parent Board Resolution",
+    "timing_days": "Day 0 - 15",
+    "description": "Confirm 100% FDI automatic route eligibility. Foreign parent passes board resolution authorizing Indian private limited subsidiary incorporation and appointing authorized signatories.",
+    "grade": "A",
+    "portal_url": "https://dpiit.gov.in"
+  },
+  {
+    "step_number": 2,
+    "title": "Director Identification & Digital Signatures (DIN & DSC)",
+    "timing_days": "Day 5 - 20",
+    "description": "Appoint at least two directors, with at least one Indian resident director (182+ days residency). Obtain Digital Signature Certificates (DSC) and Director Identification Numbers (DIR-3).",
+    "grade": "A",
+    "portal_url": "https://www.mca.gov.in"
+  },
+  {
+    "step_number": 3,
+    "title": "MCA SPICe+ Integrated Company Incorporation",
+    "timing_days": "Day 10 - 30",
+    "description": "File SPICe+ (INC-32) along with electronic Memorandum (INC-33) and Articles of Association (INC-34), obtaining Certificate of Incorporation, corporate PAN, and TAN.",
+    "grade": "A",
+    "portal_url": "https://www.mca.gov.in"
+  },
+  {
+    "step_number": 4,
+    "title": "Corporate Bank Account & Equity Inward Remittance",
+    "timing_days": "Day 15 - 45",
+    "description": "Open corporate current account with an Authorised Dealer (AD) Category-I bank. Remit paid-up equity share capital from abroad and secure Foreign Inward Remittance Certificate (FIRC).",
+    "grade": "A",
+    "portal_url": "https://firms.rbi.org.in"
+  },
+  {
+    "step_number": 5,
+    "title": "RBI FIRMS Entity Master & FC-GPR Filing",
+    "timing_days": "Within 30 Days of Allotment",
+    "description": "Register entity master on RBI FIRMS portal, allot shares within statutory window, obtain valuation certificate from chartered accountant, and submit Form FC-GPR.",
+    "grade": "A",
+    "portal_url": "https://firms.rbi.org.in"
+  },
+  {
+    "step_number": 6,
+    "title": "GST Registration & Letter of Undertaking (LUT)",
+    "timing_days": "Day 20 - 45",
+    "description": "Register for GST (REG-01). Submit annual Letter of Undertaking (RFD-11) for zero-rated export of IT/ITeS services without payment of integrated GST.",
+    "grade": "A",
+    "portal_url": "https://www.gst.gov.in"
+  },
+  {
+    "step_number": 7,
+    "title": "Intercompany Agreement & Transfer Pricing Policy",
+    "timing_days": "Day 30 - 60",
+    "description": "Execute master intercompany services agreement between parent and Indian subsidiary establishing arm's length cost-plus transfer pricing mechanism and benchmark study.",
+    "grade": "A",
+    "portal_url": "https://www.incometax.gov.in"
+  },
+  {
+    "step_number": 8,
+    "title": "STPI Registration or SEZ Customs Bonding",
+    "timing_days": "Day 30 - 75",
+    "description": "Submit application to Software Technology Parks of India (STPI) or SEZ Development Commissioner for bonded software export status and duty exemptions on capital goods.",
+    "grade": "A",
+    "portal_url": "https://stpi.in"
+  },
+  {
+    "step_number": 9,
+    "title": "Managed Workspace Lease & Stamp Duty Registration",
+    "timing_days": "Day 45 - 90",
+    "description": "Finalize managed enterprise workspace agreement or commercial lease. Execute state stamp duty adjudication and municipal registration.",
+    "grade": "B",
+    "portal_url": "https://cbre.co.in"
+  },
+  {
+    "step_number": 10,
+    "title": "Employer Statutory Registrations (EPFO, ESIC, Shops & Est.)",
+    "timing_days": "Day 45 - 90",
+    "description": "Complete Employees' Provident Fund (EPFO), Employees' State Insurance (ESIC), state Shops and Commercial Establishments licence, and Professional Tax enrolment.",
+    "grade": "A",
+    "portal_url": "https://shramsuvidha.gov.in"
+  },
+  {
+    "step_number": 11,
+    "title": "POSH Internal Committee & Workplace Conduct Policies",
+    "timing_days": "Before First Hire",
+    "description": "Draft employment handbook, establish Prevention of Sexual Harassment (POSH) policy, and formally constitute Internal Committee with external member.",
+    "grade": "A",
+    "portal_url": "https://wcd.gov.in"
+  },
+  {
+    "step_number": 12,
+    "title": "Data Protection Notices & Incident Reporting Framework",
+    "timing_days": "Day 60 - 90",
+    "description": "Implement privacy notices complying with Digital Personal Data Protection Act, establish data processing agreements, and formulate 6-hour CERT-In incident reporting plan.",
+    "grade": "A",
+    "portal_url": "https://www.meity.gov.in"
+  }
+]

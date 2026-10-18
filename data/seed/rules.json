@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "code": "RULE-FDI-01",
+    "title": "Automatic Route 100% Foreign Direct Investment for IT/ITeS",
+    "text": "100% foreign equity is permitted under the automatic route for IT software and IT-enabled services without prior government approval, provided the investor is not incorporated in or beneficial owner of a country sharing a land border with India.",
+    "grade": "A",
+    "official_source_id": 3,
+    "applies_if": {"sector": "IT/ITeS"},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 2,
+    "code": "RULE-DIR-01",
+    "title": "Resident Director Requirement (Section 149(3) Companies Act)",
+    "text": "At least one director must stay in India for a total period of not less than 182 days during the financial year.",
+    "grade": "A",
+    "official_source_id": 2,
+    "applies_if": {"entity_type": "private_limited"},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 3,
+    "code": "RULE-RBI-01",
+    "title": "RBI FIRMS Single Master Form & FC-GPR Reporting",
+    "text": "Inward equity remittance must be reported through an Authorised Dealer bank. Shares must be allotted and FC-GPR return filed on the RBI FIRMS portal within 30 days of share allotment.",
+    "grade": "A",
+    "official_source_id": 1,
+    "applies_if": {"foreign_capital": true},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 4,
+    "code": "RULE-GST-01",
+    "title": "Zero-Rated Export of Services under Letter of Undertaking (LUT)",
+    "text": "Services exported to a foreign parent qualify as zero-rated supply under GST provided consideration is received in convertible foreign exchange and the relationship is not classed as an intermediary service. An annual LUT (RFD-11) enables export without tax payment.",
+    "grade": "A",
+    "official_source_id": 4,
+    "applies_if": {"export_services": true},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 5,
+    "code": "RULE-TP-01",
+    "title": "Transfer Pricing & Intercompany Agreement Documentation",
+    "text": "Transactions between the Indian captive and the foreign parent must adhere to the arm's length principle (typically Cost Plus method). Mandatory accountant's report in Form 3CEB and master file documentation required.",
+    "grade": "A",
+    "official_source_id": 5,
+    "applies_if": {"cross_border_transactions": true},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 6,
+    "code": "RULE-TAX-10AA",
+    "title": "SEZ Section 10AA Corporate Tax Holiday Sunset",
+    "text": "The 15-year direct tax holiday under Section 10AA of the Income Tax Act sunset on 31 March 2020 for new unit commencement. New captive setups cannot claim this exemption.",
+    "grade": "A",
+    "official_source_id": 5,
+    "applies_if": {},
+    "status_logic": {"default": "Closed"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 7,
+    "code": "RULE-TAX-80JJAA",
+    "title": "Section 80JJAA Deduction for Additional Employee Cost",
+    "text": "A deduction of 30% of additional employee cost for three assessment years is available under Section 80JJAA, but strictly restricted to employees whose total monthly emoluments do not exceed INR 25,000.",
+    "grade": "A",
+    "official_source_id": 5,
+    "applies_if": {"salary_cap_exceeded": true},
+    "status_logic": {"default": "Does not fit"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 8,
+    "code": "RULE-RD-01",
+    "title": "In-House R&D Deduction & Patent Box Regime",
+    "text": "Tax incentives for in-house research and development require DSIR approval. Applicable if the captive conducts scientific research and retains qualifying intellectual property.",
+    "grade": "B",
+    "official_source_id": 5,
+    "applies_if": {"functions": ["Engineering R&D"]},
+    "status_logic": {"default": "Opportunity"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 9,
+    "code": "RULE-NIGHT-01",
+    "title": "State Night-Shift & 24x7 Operating Exemption",
+    "text": "Operating 24x7 customer support or global operations across night shifts requires state Shops & Establishments exemption, dedicated transport facilities, and security protocols.",
+    "grade": "A",
+    "official_source_id": 2,
+    "applies_if": {"functions": ["Customer experience"]},
+    "status_logic": {"default": "Check"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 10,
+    "code": "RULE-LABOUR-RETRENCH",
+    "title": "Industrial Relations Retrenchment Threshold",
+    "text": "Industrial establishments employing 100 or 300 or more workers (dependent on state-specific enactments and Labour Code adoption) require government permission for layoffs or closure.",
+    "grade": "A",
+    "official_source_id": 2,
+    "applies_if": {"headcount_min": 100},
+    "status_logic": {"default": "Check"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 11,
+    "code": "RULE-POSH-01",
+    "title": "Mandatory Internal Committee under POSH Act 2013",
+    "text": "Every employer of an administrative office or workplace employing 10 or more employees must constitute an Internal Committee to redress complaints of sexual harassment.",
+    "grade": "A",
+    "official_source_id": 2,
+    "applies_if": {"headcount_min": 10},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  },
+  {
+    "id": 12,
+    "code": "RULE-DPDP-01",
+    "title": "Digital Personal Data Protection Act 2023 Compliance",
+    "text": "Compliance with consent notices, purpose limitation, cross-border transfer guidelines, and security safeguards. Cyber incident reporting within 6 hours to CERT-In.",
+    "grade": "A",
+    "official_source_id": 11,
+    "applies_if": {"data_processing": true},
+    "status_logic": {"default": "Applies"},
+    "last_reviewed_on": "2026-10-19"
+  }
+]

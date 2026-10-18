@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "name": "Karnataka",
+    "code": "KA",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 2,
+    "name": "Maharashtra",
+    "code": "MH",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 3,
+    "name": "Telangana",
+    "code": "TS",
+    "has_gcc_policy": true,
+    "policy_status": "framework in force"
+  },
+  {
+    "id": 4,
+    "name": "Tamil Nadu",
+    "code": "TN",
+    "has_gcc_policy": true,
+    "policy_status": "employee-linked in force"
+  },
+  {
+    "id": 5,
+    "name": "Haryana",
+    "code": "HR",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 6,
+    "name": "Uttar Pradesh",
+    "code": "UP",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 7,
+    "name": "Gujarat",
+    "code": "GJ",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 8,
+    "name": "Rajasthan",
+    "code": "RJ",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 9,
+    "name": "Madhya Pradesh",
+    "code": "MP",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 10,
+    "name": "Andhra Pradesh",
+    "code": "AP",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 11,
+    "name": "Odisha",
+    "code": "OD",
+    "has_gcc_policy": true,
+    "policy_status": "in force"
+  },
+  {
+    "id": 12,
+    "name": "Delhi",
+    "code": "DL",
+    "has_gcc_policy": false,
+    "policy_status": "framework in force"
+  },
+  {
+    "id": 13,
+    "name": "Kerala",
+    "code": "KL",
+    "has_gcc_policy": false,
+    "policy_status": "draft"
+  },
+  {
+    "id": 14,
+    "name": "Bihar",
+    "code": "BR",
+    "has_gcc_policy": false,
+    "policy_status": "reported"
+  },
+  {
+    "id": 15,
+    "name": "West Bengal",
+    "code": "WB",
+    "has_gcc_policy": false,
+    "policy_status": "none documented"
+  },
+  {
+    "id": 16,
+    "name": "Punjab",
+    "code": "PB",
+    "has_gcc_policy": false,
+    "policy_status": "none documented"
+  }
+]

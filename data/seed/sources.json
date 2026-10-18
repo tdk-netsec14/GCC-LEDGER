@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "publisher": "Reserve Bank of India",
+    "publisher_type": "regulator",
+    "title": "Foreign Investment Reporting and Management System (FIRMS) Portal",
+    "url": "https://firms.rbi.org.in",
+    "published_on": "2026-10-19",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 2,
+    "publisher": "Ministry of Corporate Affairs",
+    "publisher_type": "government",
+    "title": "SPICe+ Integrated Incorporation and Post-Incorporation Clearances",
+    "url": "https://www.mca.gov.in",
+    "published_on": "2026-08-01",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 3,
+    "publisher": "Department for Promotion of Industry and Internal Trade",
+    "publisher_type": "government",
+    "title": "Consolidated FDI Policy & Non-Debt Instruments Rules",
+    "url": "https://dpiit.gov.in",
+    "published_on": "2026-07-15",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 4,
+    "publisher": "Goods and Services Tax Council",
+    "publisher_type": "government",
+    "title": "GST Export of Services & LUT (RFD-11) Circular",
+    "url": "https://www.gst.gov.in",
+    "published_on": "2026-06-10",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 5,
+    "publisher": "Income Tax Department",
+    "publisher_type": "government",
+    "title": "Transfer Pricing Regulations and Safe Harbour Guidelines",
+    "url": "https://www.incometax.gov.in",
+    "published_on": "2026-05-20",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 6,
+    "publisher": "NASSCOM-Zinnov",
+    "publisher_type": "industry body",
+    "title": "India GCC Landscape Report 2026",
+    "url": "https://nasscom.in/research/gcc-landscape-2026",
+    "published_on": "2026-09-01",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "B"
+  },
+  {
+    "id": 7,
+    "publisher": "CBRE South Asia",
+    "publisher_type": "professional firm",
+    "title": "GCC Setup and Real Estate Advisory Insights Q3 2026",
+    "url": "https://cbre.co.in/research/gcc-setup-2026",
+    "published_on": "2026-08-15",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "B"
+  },
+  {
+    "id": 8,
+    "publisher": "The Economic Times",
+    "publisher_type": "press",
+    "title": "India GCC Boom: Expansion and Headcount Trends",
+    "url": "https://economictimes.indiatimes.com/tech/ites/gcc-expansion-2026",
+    "published_on": "2026-09-12",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "C"
+  },
+  {
+    "id": 9,
+    "publisher": "TechCircle Daily",
+    "publisher_type": "press",
+    "title": "Global Capability Centres Scale Across Tier-1 and Tier-2 Cities",
+    "url": "https://techcircle.in/2026/08/gcc-tier2-scale",
+    "published_on": "2026-08-20",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "C"
+  },
+  {
+    "id": 10,
+    "publisher": "GCC Directory Hub",
+    "publisher_type": "vendor",
+    "title": "India Global In-House Centers Listing 2026",
+    "url": "https://gccdirectoryhub.example.org/list",
+    "published_on": "2026-07-01",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "D"
+  },
+  {
+    "id": 11,
+    "publisher": "Ministry of Electronics and Information Technology",
+    "publisher_type": "government",
+    "title": "Digital Personal Data Protection Act Implementation Status",
+    "url": "https://www.meity.gov.in",
+    "published_on": "2026-08-10",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  },
+  {
+    "id": 12,
+    "publisher": "Government of Karnataka",
+    "publisher_type": "government",
+    "title": "Karnataka GCC Policy 2024-2029",
+    "url": "https://investkarnataka.co.in",
+    "published_on": "2024-09-15",
+    "last_checked_on": "2026-10-19",
+    "default_grade": "A"
+  }
+]

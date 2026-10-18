@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "State Capital Subsidy Rate Discrepancy",
+    "reading": "Industry advisory reports cite a flat 20% capital subsidy on all equipment, whereas the official state gazette notification limits capital subsidy to 15% capped at INR 10 Crore, restricted strictly to high-end hardware and server infrastructure.",
+    "to_settle": "Review the official Department of IT & Electronics Gazette Notification No. ITD/GCC/2024-08 Section 4.2.",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 2,
+    "title": "Corporate Tax Holiday Availability for New SEZ Units",
+    "reading": "Some secondary marketing materials claim a 15-year 100% tax holiday under Section 10AA for new GCCs. However, Section 10AA sunset on 31 March 2020 for new unit commencement. New GCC units are taxable under the standard 22% regime (Section 115BAA) with MAT exemptions where applicable.",
+    "to_settle": "Examine Income Tax Act Section 10AA(1) sunset clause and CBDT Circular No. 3/2020.",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 3,
+    "title": "DPDP Act Rules Enforcement Timeline",
+    "reading": "Press commentary in Q2 2026 claimed all data fiduciary penalties were immediately enforceable from January 2026. The Ministry of Electronics and Information Technology notification establishes a phased rollout with specific compliance grace periods for data processors.",
+    "to_settle": "Check MeitY Gazette Notification of Digital Personal Data Protection Rules commencement schedule.",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 4,
+    "title": "Section 80JJAA Worked Example Exceeding Statutory Salary Cap",
+    "reading": "An advisory firm model applied the 30% additional employee cost deduction under Section 80JJAA to software engineers earning INR 35,000 per month. Section 80JJAA explicitly restricts eligible employees to those with total emoluments not exceeding INR 25,000 per month.",
+    "to_settle": "Consult Section 80JJAA(2)(c) explanation (ii) of the Income Tax Act.",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 5,
+    "title": "GCC Count Definition: Operating Units vs. Corporate Legal Entities",
+    "reading": "Counts vary widely from 1,600 to 2,117 because certain reports count distinct registered company PANs/CINs, whereas others count physical multi-city delivery locations of the same global corporate entity.",
+    "to_settle": "Compare Ministry of Corporate Affairs FDI filings against industry body facility-level directories.",
+    "last_checked_on": "2026-10-19"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Apex GCC Advisory Partners (Fictional)",
+    "category": "Setup & Strategy Advisory",
+    "fee_tier": "Tier 1 Premium",
+    "profile_url": "https://example.org/fictional-providers/apex",
+    "claimed_count": 40,
+    "verified_count": 31
+  },
+  {
+    "id": 2,
+    "name": "Global Corp Infrastructure Solutions (Fictional)",
+    "category": "Real Estate & Managed Workspace",
+    "fee_tier": "Tier 1 Enterprise",
+    "profile_url": "https://example.org/fictional-providers/global-corp",
+    "claimed_count": 120,
+    "verified_count": 38
+  },
+  {
+    "id": 3,
+    "name": "Kavach Compliance & Legal Advisors (Fictional)",
+    "category": "Legal, Tax & Transfer Pricing",
+    "fee_tier": "Tier 2 Mid-Market",
+    "profile_url": "https://example.org/fictional-providers/kavach",
+    "claimed_count": 60,
+    "verified_count": 51
+  },
+  {
+    "id": 4,
+    "name": "TalentBridge Executive Recruiters (Fictional)",
+    "category": "Talent & Executive Search",
+    "fee_tier": "Tier 1 Premium",
+    "profile_url": "https://example.org/fictional-providers/talentbridge",
+    "claimed_count": 200,
+    "verified_count": 44
+  },
+  {
+    "id": 5,
+    "name": "Bespoke Captive Incubators (Fictional)",
+    "category": "Build-Operate-Transfer (BOT)",
+    "fee_tier": "Tier 3 Boutique",
+    "profile_url": "https://example.org/fictional-providers/bespoke",
+    "claimed_count": 25,
+    "verified_count": 22
+  },
+  {
+    "id": 6,
+    "name": "Metro Payroll & Employer of Record (Fictional)",
+    "category": "Payroll & Employer of Record",
+    "fee_tier": "Tier 2 Mid-Market",
+    "profile_url": "https://example.org/fictional-providers/metro-eor",
+    "claimed_count": 35,
+    "verified_count": 16
+  }
+]

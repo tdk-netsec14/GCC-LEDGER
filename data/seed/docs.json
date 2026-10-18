@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "group": "Company law",
+    "title": "SPICe+ Part B & AGILE-PRO-S Application Guide",
+    "issuing_authority": "Ministry of Corporate Affairs",
+    "purpose": "Integrated web form guide for incorporating a private limited company and registering for PAN, TAN, EPFO, ESIC, and GST.",
+    "step": "Incorporate",
+    "portal_url": "https://www.mca.gov.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 2,
+    "group": "Foreign exchange",
+    "title": "RBI FIRMS Single Master Form User Manual & FC-GPR Filing Guide",
+    "issuing_authority": "Reserve Bank of India",
+    "purpose": "Step-by-step instructions for submitting foreign equity allotment returns and statutory CA valuation certificates.",
+    "step": "Report foreign investment to RBI",
+    "portal_url": "https://firms.rbi.org.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 3,
+    "group": "Tax",
+    "title": "Form RFD-11 Letter of Undertaking (LUT) Submission Procedures",
+    "issuing_authority": "Central Board of Indirect Taxes and Customs",
+    "purpose": "Annual statutory filing enabling zero-rated export of software and IT services without prepayment of IGST.",
+    "step": "Indirect tax",
+    "portal_url": "https://www.gst.gov.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 4,
+    "group": "Tax",
+    "title": "Form 3CEB Accountant's Report & Transfer Pricing Documentation Guide",
+    "issuing_authority": "Central Board of Direct Taxes",
+    "purpose": "Statutory audit report format certifying arm's length intercompany cross-border services transactions.",
+    "step": "Transfer pricing",
+    "portal_url": "https://www.incometax.gov.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 5,
+    "group": "Export regimes",
+    "title": "STPI Registration & Softex Software Export Declaration Guide",
+    "issuing_authority": "Software Technology Parks of India",
+    "purpose": "Registration process and monthly export reporting requirements for non-customs bonded software exporters.",
+    "step": "Export incentives: STPI, SEZ or IFSC",
+    "portal_url": "https://stpi.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 6,
+    "group": "Labour and employment",
+    "title": "EPFO Unified Shram Suvidha Registration & Electronic Challan Return (ECR)",
+    "issuing_authority": "Employees' Provident Fund Organisation",
+    "purpose": "Employer compliance manual for online registration, contribution schedules, and monthly wage filing.",
+    "step": "Employer registrations",
+    "portal_url": "https://shramsuvidha.gov.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 7,
+    "group": "Data and cyber",
+    "title": "CERT-In Cyber Incident Reporting Direction & Format (6-Hour Window)",
+    "issuing_authority": "Indian Computer Emergency Response Team",
+    "purpose": "Mandatory reporting timelines, incident severity classification, and system log preservation directions.",
+    "step": "Data protection and cyber security",
+    "portal_url": "https://www.cert-in.org.in",
+    "grade": "A",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 8,
+    "group": "Templates written by the team",
+    "title": "Illustrative Intercompany Master Services Agreement Outline",
+    "issuing_authority": "GCC Ledger Editorial Team",
+    "purpose": "Original illustrative template establishing service scope, cost-plus markup, audit rights, and IP assignment clauses (not legal advice).",
+    "step": "Transfer pricing",
+    "portal_url": "https://firms.rbi.org.in",
+    "grade": "B",
+    "last_checked_on": "2026-10-19"
+  },
+  {
+    "id": 9,
+    "group": "Templates written by the team",
+    "title": "Illustrative Parent Board Setup Resolution Template",
+    "issuing_authority": "GCC Ledger Editorial Team",
+    "purpose": "Original drafting template for foreign parent board approval authorizing Indian subsidiary incorporation and initial capital injection.",
+    "step": "Choose the entity",
+    "portal_url": "https://firms.rbi.org.in",
+    "grade": "B",
+    "last_checked_on": "2026-10-19"
+  }
+]

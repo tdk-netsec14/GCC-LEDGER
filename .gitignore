@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Databases & local data
+data/gcc_ledger.db
+data/gcc_ledger.db-journal
+data/vector_index/
+*.sqlite
+*.db
+
+# Environment & secrets
+.env
+.env.local
+
+# Node / Web
+apps/web/node_modules/
+apps/web/.next/
+apps/web/out/
+.next/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

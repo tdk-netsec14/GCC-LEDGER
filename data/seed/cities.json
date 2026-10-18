@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Bengaluru",
+    "state_id": 1,
+    "year1_cost_low_usd_m": 1.8,
+    "year1_cost_high_usd_m": 2.2,
+    "senior_salary_low_lakh": 24.0,
+    "senior_salary_high_lakh": 34.0,
+    "gcc_count": 760
+  },
+  {
+    "id": 2,
+    "name": "Hyderabad",
+    "state_id": 3,
+    "year1_cost_low_usd_m": 1.6,
+    "year1_cost_high_usd_m": 2.0,
+    "senior_salary_low_lakh": 22.0,
+    "senior_salary_high_lakh": 30.0,
+    "gcc_count": 420
+  },
+  {
+    "id": 3,
+    "name": "Pune",
+    "state_id": 2,
+    "year1_cost_low_usd_m": 1.5,
+    "year1_cost_high_usd_m": 1.9,
+    "senior_salary_low_lakh": 20.0,
+    "senior_salary_high_lakh": 28.0,
+    "gcc_count": 290
+  },
+  {
+    "id": 4,
+    "name": "Mumbai",
+    "state_id": 2,
+    "year1_cost_low_usd_m": 2.1,
+    "year1_cost_high_usd_m": 2.7,
+    "senior_salary_low_lakh": 26.0,
+    "senior_salary_high_lakh": 36.0,
+    "gcc_count": 210
+  },
+  {
+    "id": 5,
+    "name": "Chennai",
+    "state_id": 4,
+    "year1_cost_low_usd_m": 1.5,
+    "year1_cost_high_usd_m": 1.9,
+    "senior_salary_low_lakh": 20.0,
+    "senior_salary_high_lakh": 28.0,
+    "gcc_count": 200
+  },
+  {
+    "id": 6,
+    "name": "Gurugram",
+    "state_id": 5,
+    "year1_cost_low_usd_m": 1.7,
+    "year1_cost_high_usd_m": 2.3,
+    "senior_salary_low_lakh": 24.0,
+    "senior_salary_high_lakh": 34.0,
+    "gcc_count": 230
+  },
+  {
+    "id": 7,
+    "name": "Noida",
+    "state_id": 6,
+    "year1_cost_low_usd_m": 1.4,
+    "year1_cost_high_usd_m": 1.8,
+    "senior_salary_low_lakh": 20.0,
+    "senior_salary_high_lakh": 28.0,
+    "gcc_count": 140
+  },
+  {
+    "id": 8,
+    "name": "Ahmedabad",
+    "state_id": 7,
+    "year1_cost_low_usd_m": 1.2,
+    "year1_cost_high_usd_m": 1.6,
+    "senior_salary_low_lakh": 16.0,
+    "senior_salary_high_lakh": 24.0,
+    "gcc_count": 60
+  },
+  {
+    "id": 9,
+    "name": "Jaipur",
+    "state_id": 8,
+    "year1_cost_low_usd_m": 1.1,
+    "year1_cost_high_usd_m": 1.5,
+    "senior_salary_low_lakh": 15.0,
+    "senior_salary_high_lakh": 22.0,
+    "gcc_count": 35
+  },
+  {
+    "id": 10,
+    "name": "Bhubaneswar",
+    "state_id": 11,
+    "year1_cost_low_usd_m": 1.0,
+    "year1_cost_high_usd_m": 1.4,
+    "senior_salary_low_lakh": 14.0,
+    "senior_salary_high_lakh": 20.0,
+    "gcc_count": 25
+  }
+]

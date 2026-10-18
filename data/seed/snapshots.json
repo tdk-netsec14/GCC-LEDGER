@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "source_id": 1,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "a1b2c3d4e5f60102030405060708091011121314151617181920212223242526",
+    "stored_text_path": "data/snapshots/source_1.txt"
+  },
+  {
+    "id": 2,
+    "source_id": 2,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "b2c3d4e5f6a10102030405060708091011121314151617181920212223242527",
+    "stored_text_path": "data/snapshots/source_2.txt"
+  },
+  {
+    "id": 3,
+    "source_id": 6,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "c3d4e5f6a1b20102030405060708091011121314151617181920212223242528",
+    "stored_text_path": "data/snapshots/source_6.txt"
+  },
+  {
+    "id": 4,
+    "source_id": 11,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "d4e5f6a1b2c30102030405060708091011121314151617181920212223242529",
+    "stored_text_path": "data/snapshots/source_11.txt"
+  },
+  {
+    "id": 5,
+    "source_id": 12,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "e5f6a1b2c3d40102030405060708091011121314151617181920212223242530",
+    "stored_text_path": "data/snapshots/source_12.txt"
+  },
+  {
+    "id": 6,
+    "source_id": 10,
+    "fetched_at": "2026-10-19T03:00:00Z",
+    "content_hash": "f6a1b2c3d4e50102030405060708091011121314151617181920212223242531",
+    "stored_text_path": "data/snapshots/source_10.txt"
+  }
+]

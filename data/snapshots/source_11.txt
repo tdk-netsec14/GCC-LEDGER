@@ -1,0 +1,5 @@
+Ministry of Electronics and Information Technology (MeitY) - Digital Personal Data Protection Act 2023.
+Rules and implementing provisions under the DPDP Act are rolling out phased compliance mandates for data fiduciaries.
+Mandates include reasonable security safeguards to prevent personal data breach, timely breach notifications, consent architectures, and internal grievance redressal mechanisms.
+Incident reporting rules mandate reporting within specified windows to CERT-In and relevant authorities.
+Official Portal: https://www.meity.gov.in.

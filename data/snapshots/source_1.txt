@@ -1,0 +1,5 @@
+Reserve Bank of India - Foreign Investment Reporting and Management System (FIRMS).
+Entities receiving foreign direct investment under the automatic route for IT and IT-enabled services must file the Single Master Form (SMF) via the FIRMS portal.
+Shares must be allotted within 60 days of inward remittance, and FC-GPR filing must be completed within 30 days of share allotment.
+Annual Return on Foreign Liabilities and Assets (FLA) is required by July 15 every year.
+Official Portal: https://firms.rbi.org.in confirmed operational on 19 October 2026.

@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "company_id": 1,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru campus operational with over 4,000 corporate and tech employees."
+  },
+  {
+    "id": 2,
+    "company_id": 2,
+    "city_id": 2,
+    "status": "expanding",
+    "note": "Hyderabad tech and finance center expanding into cyber risk and AI engineering."
+  },
+  {
+    "id": 3,
+    "company_id": 2,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru facility supporting digital banking platform engineering."
+  },
+  {
+    "id": 4,
+    "company_id": 3,
+    "city_id": 1,
+    "status": "expanding",
+    "note": "Bengaluru campus is Goldman Sachs second largest office globally."
+  },
+  {
+    "id": 5,
+    "company_id": 3,
+    "city_id": 2,
+    "status": "landed",
+    "note": "Hyderabad centre opened for financial analysis and wealth engineering."
+  },
+  {
+    "id": 6,
+    "company_id": 4,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru engineering centre builds enterprise tech for US and international stores."
+  },
+  {
+    "id": 7,
+    "company_id": 4,
+    "city_id": 5,
+    "status": "expanding",
+    "note": "Chennai tech facility expanding with focus on supply chain and retail systems."
+  },
+  {
+    "id": 8,
+    "company_id": 5,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru center delivers global automotive and AI software."
+  },
+  {
+    "id": 9,
+    "company_id": 5,
+    "city_id": 3,
+    "status": "landed",
+    "note": "Pune engineering center driving connected mobility solutions."
+  },
+  {
+    "id": 10,
+    "company_id": 6,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru information technology centre driving low-carbon and reservoir analytics."
+  },
+  {
+    "id": 11,
+    "company_id": 7,
+    "city_id": 2,
+    "status": "landed",
+    "note": "Hyderabad Novartis Corporate Center operates clinical reporting and global procurement."
+  },
+  {
+    "id": 12,
+    "company_id": 8,
+    "city_id": 1,
+    "status": "expanding",
+    "note": "Bengaluru 43-acre engineering and technology campus dedicated to aerospace software."
+  },
+  {
+    "id": 13,
+    "company_id": 9,
+    "city_id": 3,
+    "status": "landed",
+    "note": "Pune centre delivering global payments, core banking, and risk platforms."
+  },
+  {
+    "id": 14,
+    "company_id": 10,
+    "city_id": 1,
+    "status": "landed",
+    "note": "Bengaluru corporate research center specializing in industrial IoT."
+  },
+  {
+    "id": 15,
+    "company_id": 11,
+    "city_id": 1,
+    "status": "not_captive",
+    "note": "IT services delivery campus servicing multi-tenant external client accounts."
+  },
+  {
+    "id": 16,
+    "company_id": 12,
+    "city_id": 1,
+    "status": "not_captive",
+    "note": "Commercial client software development center; external service firm."
+  },
+  {
+    "id": 17,
+    "company_id": 15,
+    "city_id": 2,
+    "status": "announced",
+    "note": "Prospective Hyderabad life science R&D unit under initial exploratory review."
+  }
+]

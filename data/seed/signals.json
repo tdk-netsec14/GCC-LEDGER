@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "cluster": "Filings",
+    "text": "New Indian subsidiary with foreign parent on the company registry",
+    "weight": 0.50,
+    "grade": "A",
+    "lead_note": "Typically precedes commercial operations by 6 to 9 months."
+  },
+  {
+    "id": 2,
+    "cluster": "Filings",
+    "text": "Provident fund establishment registration by a foreign-parent-linked entity",
+    "weight": 0.55,
+    "grade": "A",
+    "lead_note": "Direct statutory indicator of imminent direct employee hiring."
+  },
+  {
+    "id": 3,
+    "cluster": "Filings",
+    "text": "New STPI unit registration",
+    "weight": 0.50,
+    "grade": "A",
+    "lead_note": "Export customs bonding and service zero-rating preparation."
+  },
+  {
+    "id": 4,
+    "cluster": "Filings",
+    "text": "New GST registration in IT and ITeS category",
+    "weight": 0.30,
+    "grade": "A",
+    "lead_note": "Required for intercompany invoicing and LUT export filing."
+  },
+  {
+    "id": 5,
+    "cluster": "Government",
+    "text": "State agency release or MoU naming the company",
+    "weight": 0.60,
+    "grade": "A",
+    "lead_note": "Formal public announcement via state single window or investment board."
+  },
+  {
+    "id": 6,
+    "cluster": "Real estate",
+    "text": "Occupier requirement of 50,000+ sq ft in a new city",
+    "weight": 0.45,
+    "grade": "C",
+    "lead_note": "Indicates physical facility planning for 300 to 500 seats."
+  },
+  {
+    "id": 7,
+    "cluster": "Real estate",
+    "text": "Leasing absorption spike in a commercial park",
+    "weight": 0.20,
+    "grade": "C",
+    "lead_note": "Broad sub-market clustering signal."
+  },
+  {
+    "id": 8,
+    "cluster": "Hiring",
+    "text": "10+ roles posted in a city with no prior presence",
+    "weight": 0.30,
+    "grade": "C",
+    "lead_note": "Core initial leadership hiring (center head, HR director)."
+  },
+  {
+    "id": 9,
+    "cluster": "Hiring",
+    "text": "First campus drive at a local engineering college",
+    "weight": 0.20,
+    "grade": "C",
+    "lead_note": "Entry-level pipeline development for large engineering cohorts."
+  },
+  {
+    "id": 10,
+    "cluster": "Hiring",
+    "text": "Staffing firm opens a branch for a client mandate",
+    "weight": 0.25,
+    "grade": "D",
+    "lead_note": "Contractor or build-operate-transfer staffing activity."
+  },
+  {
+    "id": 11,
+    "cluster": "Investor",
+    "text": "India expansion named on earnings calls two quarters running",
+    "weight": 0.35,
+    "grade": "B",
+    "lead_note": "Executive management commitment communicated to public markets."
+  },
+  {
+    "id": 12,
+    "cluster": "Investor",
+    "text": "Annual report lists a new India subsidiary",
+    "weight": 0.45,
+    "grade": "B",
+    "lead_note": "Audited confirmation of group entity inclusion."
+  },
+  {
+    "id": 13,
+    "cluster": "Informal",
+    "text": "Employee-forum posts about a new office",
+    "weight": 0.10,
+    "grade": "D",
+    "lead_note": "Informal discussions on professional network boards."
+  },
+  {
+    "id": 14,
+    "cluster": "Informal",
+    "text": "City-specific domain registered",
+    "weight": 0.08,
+    "grade": "D",
+    "lead_note": "Preliminary brand or regional URL reservation."
+  }
+]
