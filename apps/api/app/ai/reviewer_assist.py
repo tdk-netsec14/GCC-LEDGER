@@ -1,20 +1,36 @@
 import json
+from pathlib import Path
 
 from sqlalchemy.orm import Session
 
 from app.ai.llm_provider import get_llm_provider
+from app.config import get_project_root
 from app.models.entities import Claim, ReviewTask, SourceSnapshot
+
+
+def get_snapshot_text(snap: SourceSnapshot) -> str:
+    path = Path(snap.stored_text_path)
+    if not path.is_absolute():
+        path = get_project_root() / path
+    if path.exists():
+        return path.read_text(encoding="utf-8")
+    return ""
 
 
 def run_extraction_assistant(
     snapshot: SourceSnapshot,
     db: Session,
+    text_override: str | None = None,
 ) -> list[ReviewTask]:
     """Extract candidate claims from a snapshot text using LLM assistance.
 
     Mechanically validates that the extracted evidence span appears VERBATIM
     in the snapshot text. Creates ReviewTask items in 'open' status.
     """
+    snap_text = text_override or get_snapshot_text(snapshot)
+    if not snap_text:
+        return []
+
     provider = get_llm_provider()
     system_prompt = (
         "You are an evidence extraction assistant. Extract factual claims "
@@ -22,7 +38,7 @@ def run_extraction_assistant(
         "Return strict JSON with key 'extracted_claims': list of objects with "
         "'claim_text', 'value_number', and 'evidence_span'. The evidence_span MUST be a verbatim quote."
     )
-    user_prompt = f"--- BEGIN CONTEXT ---\n{snapshot.snapshot_text}\n--- END CONTEXT ---"
+    user_prompt = f"--- BEGIN CONTEXT ---\n{snap_text}\n--- END CONTEXT ---"
 
     raw_resp = provider.generate(system_prompt, user_prompt)
     try:
@@ -35,7 +51,7 @@ def run_extraction_assistant(
     for cand in candidates:
         span = cand.get("evidence_span", "").strip()
         # Mechanical validation: must be verbatim in snapshot
-        if not span or span not in snapshot.snapshot_text:
+        if not span or span not in snap_text:
             continue
 
         payload = {

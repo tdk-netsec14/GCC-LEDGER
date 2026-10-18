@@ -26,11 +26,16 @@ from app.routers import (
 settings = get_settings()
 
 
+from app.ingest.scheduler import shutdown_scheduler, start_scheduler
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Startup actions
+    start_scheduler()
     yield
     # Shutdown actions
+    shutdown_scheduler()
 
 
 app = FastAPI(

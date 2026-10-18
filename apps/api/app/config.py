@@ -33,4 +33,15 @@ def get_settings() -> Settings:
     return Settings()
 
 
+from pathlib import Path
+
+
+def get_project_root() -> Path:
+    p = Path(__file__).resolve()
+    for parent in p.parents:
+        if (parent / "data" / "seed").exists():
+            return parent
+    return p.parents[2]
+
+
 settings = get_settings()
