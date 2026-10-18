@@ -13,7 +13,6 @@ from app.models.entities import (
     Claim,
     Company,
     Contradiction,
-    ContradictionClaim,
     DocChunk,
     Engagement,
     GCCRecord,
@@ -91,7 +90,7 @@ def seed_database(db: Session, seed_dir: Path, snapshot_dir: Path) -> dict[str, 
             snapshot = SourceSnapshot(
                 id=item["id"],
                 source_id=item["source_id"],
-                fetched_at=datetime.fromisoformat(item["fetched_at"].replace("Z", "+00:00")),
+                fetched_at=datetime.fromisoformat(item["fetched_at"]),
                 content_hash=item["content_hash"],
                 stored_text_path=item["stored_text_path"],
             )

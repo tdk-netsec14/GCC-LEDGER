@@ -1,14 +1,14 @@
-from logging.config import fileConfig
 import os
 import sys
+from logging.config import fileConfig
 
 from alembic import context
 
 # Ensure app package is importable
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from app.database import Base, engine
 import app.models  # noqa: F401
+from app.database import Base, engine
 
 config = context.config
 

@@ -3,6 +3,7 @@ from datetime import date, datetime
 from typing import Any
 
 from sqlalchemy import (
+    JSON,
     Boolean,
     CheckConstraint,
     Date,
@@ -11,7 +12,6 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Integer,
-    JSON,
     String,
     Text,
     event,
@@ -101,9 +101,8 @@ class Claim(Timestamped):
 @event.listens_for(Claim, "before_insert")
 @event.listens_for(Claim, "before_update")
 def validate_claim_approval(mapper: Any, connection: Any, target: Claim) -> None:
-    if target.status == "approved":
-        if not target.source_id or not target.snapshot_id:
-            raise ValueError("A claim cannot be approved without a source and a snapshot.")
+    if target.status == "approved" and (not target.source_id or not target.snapshot_id):
+        raise ValueError("A claim cannot be approved without a source and a snapshot.")
 
 
 

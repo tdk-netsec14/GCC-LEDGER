@@ -1,7 +1,6 @@
 from decimal import Decimal
 from functools import lru_cache
 
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,7 +9,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./data/gcc_ledger.db"
     vector_index_path: str = "./data/vector_index"
     openai_api_key: str | None = None
-    admin_jwt_secret: str = "development-only-change-me"
+    admin_jwt_secret: str = "development-only-change-me-minimum-32-bytes-secret-key"
     daily_llm_budget_usd: Decimal = Decimal("5.00")
     fetch_user_agent: str = "GCC-Ledger/0.1"
     llm_provider: str = "mock"
