@@ -10,8 +10,8 @@ import { Lock, LogIn, ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("adminpass123");
+  const [username, setUsername] = useState("reviewer");
+  const [password, setPassword] = useState("reviewer123");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
 
           <div className="pt-3 border-t border-[var(--color-surface-container-high)] text-center space-y-1">
             <span className="text-[11px] font-mono text-[var(--color-outline)] block">
-              Default Dev Credentials: <code className="text-[var(--color-primary)]">admin</code> / <code className="text-[var(--color-primary)]">adminpass123</code>
+              Use the reviewer account configured for the API environment.
             </span>
           </div>
         </Card>

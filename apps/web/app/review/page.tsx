@@ -25,8 +25,8 @@ import {
 
 export default function ReviewPage() {
   const [token, setToken] = useState<string | null>(null);
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("adminpass123");
+  const [username, setUsername] = useState("reviewer");
+  const [password, setPassword] = useState("reviewer123");
   const [loginError, setLoginError] = useState<string | null>(null);
 
   const [tasks, setTasks] = useState<ReviewTask[]>([]);
@@ -171,7 +171,7 @@ export default function ReviewPage() {
 
           <div className="pt-2 border-t border-[var(--color-surface-container-high)] text-center">
             <span className="text-[11px] font-mono text-[var(--color-outline)]">
-              Dev Seed Credential: <code className="text-[var(--color-primary)]">admin</code> / <code className="text-[var(--color-primary)]">adminpass123</code>
+              Use the reviewer account configured for the API environment.
             </span>
           </div>
         </Card>
