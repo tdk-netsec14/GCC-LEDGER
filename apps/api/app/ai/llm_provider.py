@@ -99,7 +99,7 @@ class MockLLMProvider(LLMProvider):
 
 
 class OpenAILLMProvider(LLMProvider):
-    """Production OpenAI provider calling ChatCompletion API with strict budget tracking."""
+    """OpenAI-compatible provider calling ChatCompletion with strict budget tracking."""
 
     def __init__(self) -> None:
         api_key = settings.openai_api_key or os.getenv("OPENAI_API_KEY")
@@ -107,7 +107,10 @@ class OpenAILLMProvider(LLMProvider):
             raise ValueError("OPENAI_API_KEY environment variable is required for OpenAILLMProvider")
         try:
             from openai import OpenAI
-            self.client = OpenAI(api_key=api_key)
+            client_args: dict[str, str] = {"api_key": api_key}
+            if settings.openai_base_url:
+                client_args["base_url"] = settings.openai_base_url
+            self.client = OpenAI(**client_args)
         except ImportError:
             raise ImportError("openai package is not installed. Run pip install openai")
 
@@ -133,6 +136,6 @@ class OpenAILLMProvider(LLMProvider):
 
 def get_llm_provider() -> LLMProvider:
     provider_name = (settings.llm_provider or "mock").lower()
-    if provider_name == "openai":
+    if provider_name in {"openai", "openrouter"}:
         return OpenAILLMProvider()
     return MockLLMProvider()
