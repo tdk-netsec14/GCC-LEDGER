@@ -14,6 +14,7 @@ services:
       - "${API_PORT:-8000}:8000"
     volumes:
       - ledger_data:/var/lib/gcc-ledger
+      - ./data:/app/data
   web:
     build:
       context: ./apps/web

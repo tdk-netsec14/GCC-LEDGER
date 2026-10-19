@@ -7,6 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.auth import hash_password
+from app.config import get_project_root
 from app.database import Base, SessionLocal, engine
 from app.models.entities import (
     City,
@@ -103,7 +104,7 @@ def seed_database(db: Session, seed_dir: Path, snapshot_dir: Path) -> dict[str, 
     for snap in db.execute(select(SourceSnapshot)).scalars().all():
         text_file = Path(snap.stored_text_path)
         if not text_file.is_absolute():
-            text_file = Path(__file__).resolve().parents[3] / text_file
+            text_file = get_project_root() / text_file
         if text_file.exists():
             content = text_file.read_text(encoding="utf-8")
             passages = [p.strip() for p in content.split("\n\n") if p.strip()]
@@ -368,7 +369,7 @@ def seed_database(db: Session, seed_dir: Path, snapshot_dir: Path) -> dict[str, 
 
 def run_seed() -> None:
     Base.metadata.create_all(bind=engine)
-    root_dir = Path(__file__).resolve().parents[3]
+    root_dir = get_project_root()
     seed_dir = root_dir / "data" / "seed"
     snapshot_dir = root_dir / "data" / "snapshots"
     db = SessionLocal()
