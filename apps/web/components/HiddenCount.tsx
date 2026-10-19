@@ -1,23 +1,23 @@
 "use client";
 
 import React from "react";
-import { EyeOff } from "lucide-react";
+import { EyeOff, ArrowDown } from "lucide-react";
 import { useEvidence } from "@/lib/evidence-context";
 
-interface HiddenCountProps {
+export interface HiddenCountProps {
   count: number;
   itemName?: string;
   itemLabel?: string;
   onLowerFloor?: () => void;
   onDisableDirectOnly?: () => void;
+  className?: string;
 }
 
 export const HiddenCount: React.FC<HiddenCountProps> = ({
   count,
   itemName = "records",
   itemLabel,
-  onLowerFloor,
-  onDisableDirectOnly,
+  className = "",
 }) => {
   const label = itemLabel || itemName;
   const { floor, setFloor, directOnly, setDirectOnly } = useEvidence();
@@ -25,20 +25,27 @@ export const HiddenCount: React.FC<HiddenCountProps> = ({
   if (count <= 0) return null;
 
   return (
-    <div className="flex items-center justify-between gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-600 dark:text-slate-400 mb-4 animate-fade-in">
-      <div className="flex items-center gap-2">
-        <EyeOff className="w-4 h-4 text-slate-500 shrink-0" />
+    <div
+      role="status"
+      className={`flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-surface-container-low border border-border-subtle rounded-xl text-xs text-content-secondary shadow-sm ${className}`}
+    >
+      <div className="flex items-center gap-2.5">
+        <div className="w-6 h-6 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary">
+          <EyeOff className="w-3.5 h-3.5 shrink-0" />
+        </div>
         <span>
-          <strong>{count}</strong> {label} hidden by Floor <strong>{floor}</strong>
+          <strong className="text-content-primary font-mono">{count}</strong> {label} hidden by Floor{" "}
+          <strong className="text-content-primary font-mono">{floor}</strong>
           {directOnly ? " and Direct sources only" : ""}.
         </span>
       </div>
-      <div className="flex items-center gap-2">
+
+      <div className="flex items-center gap-3">
         {directOnly && (
           <button
             type="button"
             onClick={() => setDirectOnly(false)}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            className="text-xs text-primary hover:text-primary-hover font-geist font-medium transition-colors"
           >
             Show relayed
           </button>
@@ -47,8 +54,9 @@ export const HiddenCount: React.FC<HiddenCountProps> = ({
           <button
             type="button"
             onClick={() => setFloor("D")}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary-hover font-geist font-medium transition-colors"
           >
+            <ArrowDown className="w-3 h-3" />
             Lower to Grade D
           </button>
         )}

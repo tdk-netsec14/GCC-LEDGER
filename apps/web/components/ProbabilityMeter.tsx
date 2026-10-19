@@ -1,51 +1,63 @@
-import React from "react";
+"use client";
 
-interface ProbabilityMeterProps {
+import React from "react";
+import { Badge } from "./ui/Badge";
+
+export interface ProbabilityMeterProps {
   probability: number;
   band: "Watch" | "Warming" | "Likely" | "Near-certain" | string;
+  className?: string;
 }
 
-export const ProbabilityMeter: React.FC<ProbabilityMeterProps> = ({ probability, band }) => {
+export const ProbabilityMeter: React.FC<ProbabilityMeterProps> = ({
+  probability,
+  band,
+  className = "",
+}) => {
   const pct = Math.round(probability * 100);
 
-  const bandColors: Record<string, { bg: string; text: string; fill: string }> = {
-    Watch: { bg: "bg-slate-100 dark:bg-slate-800", text: "text-slate-700 dark:text-slate-300", fill: "bg-slate-500" },
-    Warming: { bg: "bg-amber-50 dark:bg-amber-950/40", text: "text-amber-800 dark:text-amber-300", fill: "bg-amber-500" },
-    Likely: { bg: "bg-blue-50 dark:bg-blue-950/40", text: "text-blue-800 dark:text-blue-300", fill: "bg-blue-600" },
-    "Near-certain": { bg: "bg-emerald-50 dark:bg-emerald-950/40", text: "text-emerald-800 dark:text-emerald-300", fill: "bg-emerald-600" },
+  const bandStyles: Record<string, { badgeVariant: any; fill: string; border: string }> = {
+    Watch: { badgeVariant: "neutral", fill: "bg-content-muted", border: "border-border-subtle" },
+    Warming: { badgeVariant: "warning", fill: "bg-tertiary", border: "border-tertiary/40" },
+    Likely: { badgeVariant: "primary", fill: "bg-primary", border: "border-primary/40" },
+    "Near-certain": { badgeVariant: "success", fill: "bg-secondary", border: "border-secondary/40" },
   };
 
-  const style = bandColors[band] || bandColors.Watch;
+  const style = bandStyles[band] || bandStyles.Watch;
 
   return (
-    <div className={`p-4 rounded-xl border border-slate-200 dark:border-slate-800 ${style.bg} transition-colors`}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
-          Estimated 12-Month Arrival Probability
+    <div
+      role="region"
+      aria-label={`Arrival Probability Gauge: ${pct}%, Band: ${band}`}
+      className={`p-6 rounded-2xl bg-surface-card border ${style.border} shadow-sm space-y-4 ${className}`}
+    >
+      <div className="flex items-center justify-between">
+        <span className="font-geist text-xs uppercase tracking-wider text-content-secondary font-semibold">
+          Estimated 12-Month Establishment Probability
         </span>
-        <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${style.text} bg-white dark:bg-slate-900 border border-current`}>
+        <Badge variant={style.badgeVariant} dot size="md">
           {band}
-        </span>
+        </Badge>
       </div>
 
-      <div className="flex items-baseline gap-3 mb-2 font-mono">
-        <span className="text-3xl font-extrabold text-slate-900 dark:text-white">
+      <div className="flex items-baseline gap-3">
+        <span className="text-4xl font-extrabold font-mono text-content-primary tracking-tight">
           {pct}%
         </span>
-        <span className="text-xs text-slate-500">
+        <span className="text-xs text-content-muted font-geist">
           corroborated pre-announcement signals
         </span>
       </div>
 
-      {/* Progress Bar with Band Segments */}
-      <div className="relative w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+      {/* Progress Bar with Recessed Track */}
+      <div className="relative w-full h-3 bg-surface-container-high rounded-full overflow-hidden border border-border-subtle/50">
         <div
           style={{ width: `${pct}%` }}
           className={`h-full ${style.fill} transition-all duration-500 rounded-full`}
         />
       </div>
 
-      <div className="flex justify-between text-[10px] font-mono text-slate-400 mt-1.5 px-0.5">
+      <div className="flex justify-between text-[11px] font-mono text-content-muted pt-1">
         <span>0%</span>
         <span>25% Watch</span>
         <span>55% Warming</span>

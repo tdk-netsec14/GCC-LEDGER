@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { RoadmapStep } from "@/lib/api";
 import { GradeStamp } from "./GradeStamp";
 import { CheckCircle2, Circle, ExternalLink } from "lucide-react";
+import { Card } from "./ui/Card";
 
-interface ChecklistProps {
+export interface ChecklistProps {
   steps: RoadmapStep[];
 }
 
@@ -23,36 +24,36 @@ export const Checklist: React.FC<ChecklistProps> = ({ steps }) => {
   const progressPct = steps.length > 0 ? Math.round((completedCount / steps.length) * 100) : 0;
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-5">
+    <Card padding="md" className="space-y-6">
       {/* Progress Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-border-subtle">
+        <div className="space-y-0.5">
+          <h3 className="font-headline-md font-semibold text-content-primary">
             First 90 Days Execution Checklist
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="font-body-sm text-content-secondary">
             Sequenced statutory and operational setup steps with primary evidence stamps
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <div className="text-right">
-            <span className="text-xs font-mono font-bold text-slate-900 dark:text-white">
+            <span className="text-xs font-mono font-bold text-content-primary">
               {completedCount} of {steps.length} completed
             </span>
-            <div className="text-[10px] text-slate-400 font-mono">{progressPct}% complete</div>
+            <div className="text-[11px] text-content-muted font-mono">{progressPct}% complete</div>
           </div>
-          <div className="w-24 h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="w-28 h-2 bg-surface-container-high rounded-full overflow-hidden border border-border-subtle/50">
             <div
               style={{ width: `${progressPct}%` }}
-              className="h-full bg-emerald-600 transition-all duration-300 rounded-full"
+              className="h-full bg-secondary transition-all duration-300 rounded-full"
             />
           </div>
         </div>
       </div>
 
       {/* Steps List */}
-      <div className="divide-y divide-slate-100 dark:divide-slate-800 border-t border-slate-100 dark:border-slate-800 pt-2">
+      <div className="divide-y divide-border-subtle/60">
         {steps.map((s) => {
           const isDone = !!completedSteps[s.step_number];
 
@@ -60,44 +61,44 @@ export const Checklist: React.FC<ChecklistProps> = ({ steps }) => {
             <div
               key={s.step_number}
               onClick={() => toggleStep(s.step_number)}
-              className={`py-3.5 px-3 -mx-3 rounded-lg flex items-start gap-3.5 cursor-pointer transition-colors ${
+              className={`py-4 px-3 -mx-3 rounded-xl flex items-start gap-4 cursor-pointer transition-colors ${
                 isDone
-                  ? "bg-emerald-50/40 dark:bg-emerald-950/20 text-slate-500"
-                  : "hover:bg-slate-50 dark:hover:bg-slate-800/40 text-slate-900 dark:text-white"
+                  ? "bg-secondary/5 text-content-muted"
+                  : "hover:bg-surface-container/60 text-content-primary"
               }`}
             >
               <button
                 type="button"
-                className="mt-0.5 text-slate-400 hover:text-emerald-600 focus:outline-none"
+                className="mt-0.5 text-content-muted hover:text-secondary focus:outline-none transition-colors"
                 aria-label={`Toggle step ${s.step_number}`}
               >
                 {isDone ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100 dark:fill-emerald-950" />
+                  <CheckCircle2 className="w-5 h-5 text-secondary fill-secondary/20" />
                 ) : (
-                  <Circle className="w-5 h-5 text-slate-300 dark:text-slate-600" />
+                  <Circle className="w-5 h-5 text-content-muted/60" />
                 )}
               </button>
 
-              <div className="flex-1 space-y-1">
+              <div className="flex-1 space-y-1.5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-slate-500">
+                    <span className="text-xs font-mono font-bold text-content-muted">
                       Step {s.step_number}.
                     </span>
-                    <span className={`text-sm font-semibold ${isDone ? "line-through text-slate-500" : ""}`}>
+                    <span className={`text-sm font-geist font-semibold ${isDone ? "line-through text-content-muted" : "text-content-primary"}`}>
                       {s.title}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container-high text-content-secondary border border-border-subtle">
                       {s.timing_days}
                     </span>
                     <GradeStamp grade={s.grade} size="sm" />
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+                <p className="text-xs text-content-secondary leading-relaxed font-sans">
                   {s.description}
                 </p>
 
@@ -108,10 +109,10 @@ export const Checklist: React.FC<ChecklistProps> = ({ steps }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 text-[11px] text-blue-600 dark:text-blue-400 hover:underline font-mono"
+                      className="inline-flex items-center gap-1 font-geist text-xs text-primary hover:text-primary-hover transition-colors"
                     >
+                      <span>Official Registry Portal</span>
                       <ExternalLink className="w-3 h-3" />
-                      {s.portal_url.replace("https://", "")}
                     </a>
                   </div>
                 )}
@@ -120,7 +121,7 @@ export const Checklist: React.FC<ChecklistProps> = ({ steps }) => {
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 };
 

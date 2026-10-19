@@ -1,26 +1,34 @@
+"use client";
+
 import React from "react";
 import { Contradiction } from "@/lib/api";
 import { GradeStamp } from "./GradeStamp";
-import { HelpCircle, Sparkles } from "lucide-react";
+import { Card } from "./ui/Card";
+import { Sparkles, AlertTriangle } from "lucide-react";
 
-interface ContradictionCardProps {
+export interface ContradictionCardProps {
   contradiction: Contradiction;
+  className?: string;
 }
 
-export const ContradictionCard: React.FC<ContradictionCardProps> = ({ contradiction }) => {
+export const ContradictionCard: React.FC<ContradictionCardProps> = ({
+  contradiction,
+  className = "",
+}) => {
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+    <Card padding="md" className={`space-y-4 ${className}`}>
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800">
+        <div className="space-y-1">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono uppercase font-bold text-tertiary bg-tertiary/15 border border-tertiary/25">
+            <AlertTriangle className="w-3 h-3" />
             Registered Contradiction #{contradiction.id}
           </span>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
+          <h3 className="font-headline-md font-semibold text-content-primary">
             {contradiction.title}
           </h3>
         </div>
         {contradiction.last_checked_on && (
-          <span className="text-[11px] font-mono text-slate-400 shrink-0">
+          <span className="text-[11px] font-mono text-content-muted shrink-0">
             Checked {contradiction.last_checked_on}
           </span>
         )}
@@ -32,15 +40,15 @@ export const ContradictionCard: React.FC<ContradictionCardProps> = ({ contradict
           {contradiction.claims.map((cl) => (
             <div
               key={cl.id}
-              className="p-3.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 space-y-1.5"
+              className="p-3.5 rounded-xl border border-border-subtle bg-surface-container-low space-y-2"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                <span className="text-xs font-geist font-semibold text-content-primary">
                   {cl.publisher}
                 </span>
                 <GradeStamp grade={cl.grade} relayed={cl.relayed} size="sm" />
               </div>
-              <p className="text-xs text-slate-700 dark:text-slate-300 font-mono leading-relaxed">
+              <p className="text-xs text-content-secondary font-mono leading-relaxed bg-surface-card p-2 rounded-lg border border-border-subtle/50">
                 “{cl.text}”
               </p>
             </div>
@@ -49,20 +57,20 @@ export const ContradictionCard: React.FC<ContradictionCardProps> = ({ contradict
       )}
 
       {/* Reading / Analysis */}
-      <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
-        <strong className="text-slate-900 dark:text-slate-200 font-semibold">Reading: </strong>
+      <div className="text-xs text-content-secondary leading-relaxed border-t border-border-subtle/80 pt-3">
+        <strong className="text-content-primary font-geist font-semibold">Reading: </strong>
         {contradiction.reading}
       </div>
 
-      {/* To Settle It */}
-      <div className="flex items-start gap-2 bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 rounded-lg p-3 text-xs text-indigo-900 dark:text-indigo-300">
-        <Sparkles className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
+      {/* To Settle It Primary Document Callout */}
+      <div className="flex items-start gap-2.5 bg-primary/10 border border-primary/25 rounded-xl p-3 text-xs text-content-primary font-sans">
+        <Sparkles className="w-4 h-4 text-primary shrink-0 mt-0.5" />
         <div>
-          <strong>To settle it: </strong>
-          <span>{contradiction.to_settle}</span>
+          <strong className="text-primary font-geist font-semibold">To settle it: </strong>
+          <span className="text-content-secondary">{contradiction.to_settle}</span>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

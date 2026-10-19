@@ -3,7 +3,25 @@
 import { useEffect, useState } from "react";
 import { api, ReviewTask, Grade } from "@/lib/api";
 import GradeStamp from "@/components/GradeStamp";
-import { ShieldAlert, CheckCircle, XCircle, LogIn, Lock, FileSearch, UserCheck, AlertCircle } from "lucide-react";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Input } from "@/components/ui/Input";
+import {
+  ShieldAlert,
+  CheckCircle,
+  XCircle,
+  LogIn,
+  Lock,
+  FileSearch,
+  UserCheck,
+  AlertCircle,
+  Layers,
+  Inbox,
+  LogOut,
+  Clock,
+  Sparkles
+} from "lucide-react";
 
 export default function ReviewPage() {
   const [token, setToken] = useState<string | null>(null);
@@ -91,125 +109,195 @@ export default function ReviewPage() {
     }
   };
 
+  // If not logged in, show Obsidian-styled Authentication Form
   if (!token) {
     return (
-      <div className="max-w-md mx-auto py-12 space-y-6">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto">
-            <Lock className="w-6 h-6" />
+      <div className="max-w-md mx-auto py-16 space-y-6 animate-fade-in">
+        <div className="text-center space-y-3">
+          <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary-container)]/20 border border-[var(--color-primary)]/30 text-[var(--color-primary)] flex items-center justify-center mx-auto shadow-lg">
+            <Lock className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--color-on-surface)]">
             Reviewer Authentication
           </h1>
-          <p className="text-xs text-slate-500">
-            Access to the moderation queue is restricted to authorized data reviewers.
-            All moderation actions write immutable records to the audit log.
+          <p className="text-xs sm:text-sm text-[var(--color-on-surface-variant)] leading-relaxed">
+            Access to the moderation queue is restricted to authorized editorial reviewers. All actions generate immutable audit log records.
           </p>
         </div>
 
-        <form
-          onSubmit={handleLogin}
-          className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-4"
-        >
+        <Card className="p-6 sm:p-8 space-y-4 border border-[var(--color-outline-variant)]/20 shadow-xl bg-[var(--color-surface-container)]">
           {loginError && (
-            <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-200 text-xs">
+            <div className="p-3 rounded-lg bg-[var(--color-error)]/10 border border-[var(--color-error)]/30 text-[var(--color-error)] text-xs">
               {loginError}
             </div>
           )}
 
-          <div>
-            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Username
-            </label>
-            <input
-              type="text"
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500"
-            />
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label htmlFor="rev-username" className="block text-xs font-semibold text-[var(--color-on-surface)] mb-1">
+                Reviewer Username
+              </label>
+              <Input
+                id="rev-username"
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="rev-password" className="block text-xs font-semibold text-[var(--color-on-surface)] mb-1">
+                Password
+              </label>
+              <Input
+                id="rev-password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full flex items-center justify-center gap-2 text-xs font-bold py-2.5 shadow-[0_0_20px_rgba(197,192,255,0.25)]"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Sign In to Review Queue</span>
+            </Button>
+          </form>
+
+          <div className="pt-2 border-t border-[var(--color-surface-container-high)] text-center">
+            <span className="text-[11px] font-mono text-[var(--color-outline)]">
+              Dev Seed Credential: <code className="text-[var(--color-primary)]">admin</code> / <code className="text-[var(--color-primary)]">adminpass123</code>
+            </span>
           </div>
-
-          <div>
-            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-sm"
-          >
-            <LogIn className="w-4 h-4" />
-            <span>Sign In to Review Queue</span>
-          </button>
-
-          <p className="text-[11px] text-center text-slate-400 pt-1">
-            Default reviewer credential in dev seed: <code className="font-mono">admin</code> / <code className="font-mono">adminpass123</code>
-          </p>
-        </form>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <UserCheck className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-              Review Queue
-            </h1>
+    <div className="space-y-8 animate-fade-in max-w-[1280px]">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[11px] font-semibold tracking-wider uppercase text-[var(--color-outline)]">
+              Reference // Editorial Governance
+            </span>
+            <span className="w-1 h-1 rounded-full bg-[var(--color-outline-variant)]" />
+            <Badge variant="primary" size="sm">Active Session</Badge>
           </div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            Moderation pipeline for public leads, AI-extracted claims, and contradiction settlements.
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--color-on-surface)]">
+            Reviewer Workspace
+          </h1>
+          <p className="text-sm text-[var(--color-on-surface-variant)]">
+            Moderation triage pipeline for public directory leads, AI-extracted claims, and contradiction settlements.
           </p>
         </div>
 
-        <button
-          type="button"
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleLogout}
-          className="text-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+          className="text-xs self-start sm:self-auto"
         >
+          <LogOut className="w-3.5 h-3.5 mr-1.5" />
           Sign Out
-        </button>
+        </Button>
       </div>
 
       {actionError && (
-        <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-200 text-xs">
-          {actionError}
+        <div className="p-3.5 rounded-xl bg-[var(--color-error)]/10 border border-[var(--color-error)]/30 text-[var(--color-error)] text-xs flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>{actionError}</span>
         </div>
       )}
 
       {actionSuccess && (
-        <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-200 text-xs flex items-center gap-2">
-          <CheckCircle className="w-4 h-4" />
+        <div className="p-3.5 rounded-xl bg-[var(--color-secondary-container)]/20 border border-[var(--color-secondary)]/30 text-[var(--color-secondary)] text-xs flex items-center gap-2">
+          <CheckCircle className="w-4 h-4 shrink-0" />
           <span>{actionSuccess}</span>
         </div>
       )}
 
+      {/* 3 KPI Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <Card className="p-5 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[var(--color-outline)]">
+            <span className="font-mono text-[11px] uppercase tracking-wider font-semibold">Triage Queue</span>
+            <Inbox className="w-5 h-5 text-[var(--color-primary)]" />
+          </div>
+          <div className="my-3">
+            <div className="text-3xl font-black font-mono text-[var(--color-primary)]">
+              {tasks.length} <span className="text-base font-medium text-[var(--color-on-surface-variant)]">{stateFilter} tasks</span>
+            </div>
+            <p className="text-xs text-[var(--color-on-surface-variant)] mt-1">
+              Items awaiting editorial review and scoring
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 pt-1 text-[var(--color-outline)] text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
+            <span>Public submissions and AI extractions</span>
+          </div>
+        </Card>
+
+        <Card className="p-5 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[var(--color-outline)]">
+            <span className="font-mono text-[11px] uppercase tracking-wider font-semibold">Audit Policy</span>
+            <ShieldAlert className="w-5 h-5 text-[var(--color-secondary)]" />
+          </div>
+          <div className="my-3">
+            <div className="text-3xl font-black font-mono text-[var(--color-secondary)]">
+              Dual Proof
+            </div>
+            <p className="text-xs text-[var(--color-on-surface-variant)] mt-1">
+              Minimum 2 independent sources required for Grade A
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 pt-1 text-[var(--color-outline)] text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-secondary)]" />
+            <span>Articles of Association + EPFO</span>
+          </div>
+        </Card>
+
+        <Card className="p-5 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[var(--color-outline)]">
+            <span className="font-mono text-[11px] uppercase tracking-wider font-semibold">Ledger Settlement</span>
+            <Clock className="w-5 h-5 text-[var(--color-tertiary)]" />
+          </div>
+          <div className="my-3">
+            <div className="text-3xl font-black font-mono text-[var(--color-tertiary)]">
+              Instant
+            </div>
+            <p className="text-xs text-[var(--color-on-surface-variant)] mt-1">
+              Approved records sync directly to live ledger tables
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 pt-1 text-[var(--color-outline)] text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-tertiary)]" />
+            <span>Zero manual cache invalidation required</span>
+          </div>
+        </Card>
+      </div>
+
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
-        <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-          Filter State:
+      <div className="flex items-center gap-2 p-1.5 rounded-xl bg-[var(--color-surface-container-low)] border border-[var(--color-outline-variant)]/20 shadow-sm w-fit">
+        <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[var(--color-outline)] px-2">
+          State:
         </span>
         {["open", "resolved", "rejected"].map((st) => (
           <button
             key={st}
             type="button"
             onClick={() => setStateFilter(st)}
-            className={`px-3 py-1 rounded-md text-xs font-medium capitalize transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all ${
               stateFilter === st
-                ? "bg-indigo-600 text-white"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                ? "bg-[var(--color-surface-container-high)] text-[var(--color-primary)] shadow-sm"
+                : "text-[var(--color-on-surface-variant)] hover:text-[var(--color-on-surface)]"
             }`}
           >
             {st}
@@ -217,108 +305,115 @@ export default function ReviewPage() {
         ))}
       </div>
 
+      {/* Task List */}
       {loadingTasks ? (
-        <div className="p-12 text-center text-sm text-slate-500 animate-pulse">
+        <div className="p-12 text-center text-sm text-[var(--color-outline)] animate-pulse font-mono">
           Fetching review tasks and verification payloads…
         </div>
       ) : tasks.length === 0 ? (
-        <div className="p-12 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-2">
-          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            No {stateFilter} tasks in the queue
+        <Card className="p-12 text-center space-y-2 border-dashed border-[var(--color-outline-variant)]/30">
+          <p className="text-sm font-semibold text-[var(--color-on-surface)]">
+            No {stateFilter} tasks in the moderation queue
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[var(--color-outline)]">
             All submitted directory leads and claims have been processed.
           </p>
-        </div>
+        </Card>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {tasks.map((task) => (
-            <div
+            <Card
               key={task.id}
-              className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-4"
+              className="p-5 sm:p-6 space-y-4 border border-[var(--color-outline-variant)]/20 shadow-md"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-slate-400">
+              <div className="flex items-center justify-between pb-3 border-b border-[var(--color-surface-container-high)]">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[var(--color-surface-container-high)] text-[var(--color-primary)]">
                     Task #{task.id}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                  <Badge variant="neutral" size="sm">
                     {task.kind}
-                  </span>
+                  </Badge>
                 </div>
-                <span className="text-xs text-slate-400 font-mono">
+                <span className="font-mono text-xs text-[var(--color-outline)]">
                   {new Date(task.created_at).toLocaleDateString()}
                 </span>
               </div>
 
               {/* Payload Details */}
-              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-xs space-y-1.5 font-mono">
+              <div className="p-4 rounded-xl bg-[var(--color-surface-container-low)] border border-[var(--color-outline-variant)]/10 text-xs space-y-1.5 font-mono">
                 {Object.entries(task.payload).map(([k, v]) => (
-                  <div key={k} className="flex gap-2">
-                    <span className="text-slate-500 w-32 flex-shrink-0">{k}:</span>
-                    <span className="text-slate-900 dark:text-slate-100 break-all">
+                  <div key={k} className="flex flex-col sm:flex-row sm:gap-4">
+                    <span className="text-[var(--color-outline)] sm:w-36 shrink-0 font-medium">{k}:</span>
+                    <span className="text-[var(--color-on-surface)] break-all">
                       {typeof v === "object" ? JSON.stringify(v) : String(v)}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {/* Review Actions if task is open */}
+              {/* Action Controls for Open Tasks */}
               {task.state === "open" ? (
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-                  <div className="flex items-center gap-3 flex-1">
+                <div className="pt-3 border-t border-[var(--color-surface-container-high)] flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1">
                     <input
                       type="text"
                       placeholder="Audit justification reason…"
+                      aria-label="Audit justification reason"
                       value={reasons[task.id] || ""}
                       onChange={(e) =>
                         setReasons((prev) => ({ ...prev, [task.id]: e.target.value }))
                       }
-                      className="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100"
+                      className="flex-1 px-3 py-1.5 rounded-lg border border-[var(--color-outline-variant)]/30 bg-[var(--color-surface-container-lowest)] text-xs text-[var(--color-on-surface)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
                     />
                     <select
                       value={grades[task.id] || "C"}
+                      aria-label="Assign grade"
                       onChange={(e) =>
                         setGrades((prev) => ({
                           ...prev,
                           [task.id]: e.target.value as Grade,
                         }))
                       }
-                      className="px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 font-mono"
+                      className="px-3 py-1.5 rounded-lg border border-[var(--color-outline-variant)]/30 bg-[var(--color-surface-container-lowest)] text-xs text-[var(--color-on-surface)] font-mono focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
                     >
-                      <option value="A">Grade A (Official)</option>
-                      <option value="B">Grade B (Industry)</option>
-                      <option value="C">Grade C (Press)</option>
-                      <option value="D">Grade D (Unreviewed)</option>
+                      <option value="A">Grade A (Official Gazetted)</option>
+                      <option value="B">Grade B (Audited Disclosures)</option>
+                      <option value="C">Grade C (Press / Self-Claim)</option>
+                      <option value="D">Grade D (Unverified Draft)</option>
                     </select>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
+                  <div className="flex items-center gap-2 self-end md:self-auto">
+                    <Button
+                      variant="primary"
+                      size="sm"
                       onClick={() => handleDecision(task.id, "approved")}
-                      className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                      className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5"
                     >
                       <CheckCircle className="w-3.5 h-3.5" />
                       <span>Approve</span>
-                    </button>
-                    <button
-                      type="button"
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={() => handleDecision(task.id, "rejected")}
-                      className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                      className="border-[var(--color-error)] text-[var(--color-error)] hover:bg-[var(--color-error)]/10 text-xs font-bold flex items-center gap-1.5"
                     >
                       <XCircle className="w-3.5 h-3.5" />
                       <span>Reject</span>
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ) : (
-                <div className="pt-2 text-xs text-slate-500 flex items-center gap-2">
-                  <span className="font-semibold capitalize">Status: {task.decision || task.state}</span>
+                <div className="pt-2 text-xs font-mono text-[var(--color-outline)] flex items-center gap-2">
+                  <span className="font-semibold capitalize text-[var(--color-on-surface)]">
+                    Decision: {task.decision || task.state}
+                  </span>
                   {task.reason && <span>&bull; &ldquo;{task.reason}&rdquo;</span>}
                 </div>
               )}
-            </div>
+            </Card>
           ))}
         </div>
       )}

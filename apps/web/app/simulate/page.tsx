@@ -1,76 +1,83 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { api, RoadmapStep, RuleFitItem, SimulateResponse } from "@/lib/api";
+import {
+  api,
+  SimulateResponse,
+  RoadmapStep,
+  RuleFitItem,
+} from "@/lib/api";
 import { useEvidence } from "@/lib/evidence-context";
-import { CostChart } from "@/components/CostChart";
-import { Checklist } from "@/components/Checklist";
 import { GradeStamp } from "@/components/GradeStamp";
 import { HiddenCount } from "@/components/HiddenCount";
+import { CostChart } from "@/components/CostChart";
+import { Checklist } from "@/components/Checklist";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Slider } from "@/components/ui/Slider";
+import { Badge } from "@/components/ui/Badge";
 import {
-  AlertCircle,
-  ArrowRight,
   Calculator,
-  CheckCircle2,
-  Clock,
-  Compass,
+  Sliders,
   DollarSign,
+  TrendingDown,
+  Calendar,
+  CheckCircle2,
+  AlertCircle,
   HelpCircle,
-  Layers,
-  RefreshCw,
-  TrendingUp,
+  ChevronDown,
+  Building,
+  Users,
+  ShieldCheck,
+  ArrowRight,
+  FileText,
+  MapPin,
 } from "lucide-react";
 
-const FUNCTION_OPTIONS = [
-  "Technology",
-  "Finance and accounting",
-  "Data and analytics",
-  "Engineering R&D",
-  "Customer experience",
-  "HR and payroll",
+const FUNCTIONS = [
+  { id: "tech", label: "Technology & Software", default: true },
+  { id: "finance", label: "Finance & Accounting", default: true },
+  { id: "data", label: "Data & AI/ML", default: true },
+  { id: "erd", label: "Engineering R&D", default: false },
+  { id: "cx", label: "Customer Experience", default: false },
+  { id: "hr", label: "HR & Global Payroll", default: false },
 ];
 
-export default function SimulatorPage() {
+export default function SetupSimulatorPage() {
   const { floor, directOnly } = useEvidence();
 
-  // Inputs
-  const [headcount, setHeadcount] = useState(150);
-  const [costAdvantage, setCostAdvantage] = useState(0.40);
-  const [hiddenAllowance, setHiddenAllowance] = useState(0.12);
-  const [exchangeRate, setExchangeRate] = useState(85.0);
-  const [b50Cost, setB50Cost] = useState(2.0); // Bengaluru benchmark
+  // Simulator Inputs (Default calibrated per Section 5.5 and Golden Case)
+  const [cityName, setCityName] = useState<string>("Bengaluru");
+  const [headcount, setHeadcount] = useState<number>(150);
+  const [costAdvantage, setCostAdvantage] = useState<number>(0.4);
+  const [hiddenCostAllowance, setHiddenCostAllowance] = useState<number>(0.12);
+  const [exchangeRate, setExchangeRate] = useState<number>(85.0);
   const [selectedFunctions, setSelectedFunctions] = useState<string[]>([
-    "Technology",
-    "Data and analytics",
-    "Engineering R&D",
+    "tech",
+    "finance",
+    "data",
   ]);
-  const [currencyMode, setCurrencyMode] = useState<"usd" | "inr">("usd");
 
-  // Output State
+  // Currency view toggle
+  const [currency, setCurrency] = useState<"usd" | "inr">("usd");
+  const [activeTab, setActiveTab] = useState<"overview" | "rules" | "roadmap">("roadmap");
+
+  // Data states
   const [simData, setSimData] = useState<SimulateResponse | null>(null);
   const [roadmapSteps, setRoadmapSteps] = useState<RoadmapStep[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const toggleFunction = (fn: string) => {
-    if (selectedFunctions.includes(fn)) {
-      setSelectedFunctions(selectedFunctions.filter((f) => f !== fn));
-    } else {
-      setSelectedFunctions([...selectedFunctions, fn]);
-    }
-  };
-
-  const runSimulationModel = async () => {
+  const fetchSimulation = async () => {
     setLoading(true);
     setError(null);
     try {
       const [res, steps] = await Promise.all([
         api.simulate(
           {
-            b50_usd_m: b50Cost,
             headcount,
             cost_advantage: costAdvantage,
-            hidden_allowance: hiddenAllowance,
+            hidden_allowance: hiddenCostAllowance,
             exchange_rate: exchangeRate,
             functions: selectedFunctions,
           },
@@ -81,293 +88,393 @@ export default function SimulatorPage() {
       setSimData(res);
       setRoadmapSteps(steps);
     } catch (err: any) {
-      setError(err?.message || "Failed to execute simulation.");
+      setError(err?.message || "Failed to calculate simulation.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    runSimulationModel();
+    fetchSimulation();
   }, [
+    cityName,
     headcount,
     costAdvantage,
-    hiddenAllowance,
+    hiddenCostAllowance,
     exchangeRate,
-    b50Cost,
     selectedFunctions,
     floor,
     directOnly,
   ]);
 
+  const toggleFunction = (fnId: string) => {
+    setSelectedFunctions((prev) =>
+      prev.includes(fnId) ? prev.filter((f) => f !== fnId) : [...prev, fnId]
+    );
+  };
+
   return (
-    <div className="space-y-8 animate-fade-in">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Setup Simulator & Rule Fit
+    <div className="space-y-8 animate-fade-in max-w-[1240px]">
+      {/* 1. Header with Plain Headline and Stitch Context */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="font-geist text-xs font-semibold uppercase text-secondary tracking-wider">
+            Setup Simulator // 60-Month TCO Model
+          </span>
+          <span className="text-content-muted">/</span>
+          <span className="font-geist text-xs text-content-muted font-mono">SIM-TCO-2026-Q4</span>
+        </div>
+        <h1 className="text-3xl lg:text-4xl font-headline-xl text-content-primary font-bold tracking-tight">
+          Setup Simulator: What is your 5-year captive TCO versus HQ spend?
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl leading-relaxed">
-          Five-year financial model with transparent assumptions (70/30 running/setup split, 9.8% yearly pay growth, 12% hidden allowance) combined with statutory rule evaluation and the first 90 days roadmap.
+        <p className="text-body-md text-content-secondary max-w-3xl leading-relaxed">
+          Calibrated financial model comparing direct Indian GCC establishment and talent ramp-up against retained organic headquarters spend, with CBDT safe-harbor transfer pricing and STPI tax guidelines.
         </p>
       </div>
 
-      {/* Simulator Inputs Control Card */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-3">
-          <div className="flex items-center gap-2">
-            <Calculator className="w-5 h-5 text-indigo-600" />
-            <h2 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
-              Setup Assumptions & Parameters
-            </h2>
-          </div>
+      {/* Hidden Count Banner */}
+      {simData && <HiddenCount count={simData.hidden_count} itemName="statutory rules" />}
 
-          <div className="inline-flex rounded-lg border border-slate-200 dark:border-slate-700 p-0.5 text-xs font-mono">
-            <button
-              type="button"
-              onClick={() => setCurrencyMode("usd")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                currencyMode === "usd"
-                  ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              US$ Million
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrencyMode("inr")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                currencyMode === "inr"
-                  ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              INR Crore (₹)
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs">
-          {/* Headcount */}
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-mono">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Target Headcount</span>
-              <span className="font-bold text-slate-900 dark:text-white">{headcount} seats</span>
-            </div>
-            <input
-              type="range"
-              min="20"
-              max="1000"
-              step="10"
-              value={headcount}
-              onChange={(e) => setHeadcount(Number(e.target.value))}
-              className="w-full accent-slate-900 dark:accent-white"
-            />
-            <span className="text-[10px] text-slate-400">Scale impacts upfront setup & running cost</span>
-          </div>
-
-          {/* Cost Advantage */}
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-mono">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Cost Advantage over HQ</span>
-              <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                {Math.round(costAdvantage * 100)}%
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0.10"
-              max="0.75"
-              step="0.05"
-              value={costAdvantage}
-              onChange={(e) => setCostAdvantage(Number(e.target.value))}
-              className="w-full accent-slate-900 dark:accent-white"
-            />
-            <span className="text-[10px] text-slate-400">Savings relative to headquarters baseline</span>
-          </div>
-
-          {/* Hidden Allowance */}
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-mono">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Hidden-Cost Allowance</span>
-              <span className="font-bold text-amber-600 dark:text-amber-400">
-                {Math.round(hiddenAllowance * 100)}%
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0.00"
-              max="0.30"
-              step="0.02"
-              value={hiddenAllowance}
-              onChange={(e) => setHiddenAllowance(Number(e.target.value))}
-              className="w-full accent-slate-900 dark:accent-white"
-            />
-            <span className="text-[10px] text-slate-400">Travel, onboarding & expatriate governance</span>
-          </div>
-
-          {/* Benchmark City Cost */}
-          <div className="space-y-1.5">
-            <div className="flex justify-between font-mono">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">City 50-Seat Baseline</span>
-              <span className="font-bold text-indigo-600 dark:text-indigo-400">${b50Cost.toFixed(2)}M</span>
-            </div>
-            <select
-              value={b50Cost}
-              onChange={(e) => setB50Cost(Number(e.target.value))}
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
-            >
-              <option value="2.0">Bengaluru / Gurugram ($2.0M)</option>
-              <option value="1.8">Hyderabad ($1.8M)</option>
-              <option value="1.7">Pune / Chennai ($1.7M)</option>
-              <option value="2.4">Mumbai ($2.4M)</option>
-              <option value="1.6">Noida ($1.6M)</option>
-              <option value="1.4">Ahmedabad ($1.4M)</option>
-              <option value="1.2">Bhubaneswar / Tier-2 ($1.2M)</option>
-            </select>
-            <span className="text-[10px] text-slate-400">Year-one benchmark midpoint for 50 people</span>
-          </div>
-        </div>
-
-        {/* Function Scope Selector */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-            Center Functional Scope (shapes statutory rule applicability)
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {FUNCTION_OPTIONS.map((fn) => {
-              const active = selectedFunctions.includes(fn);
-              return (
-                <button
-                  key={fn}
-                  type="button"
-                  onClick={() => toggleFunction(fn)}
-                  className={`px-3 py-1.5 text-xs rounded-lg font-medium transition-colors border ${
-                    active
-                      ? "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-700 font-semibold shadow-sm"
-                      : "bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  {fn}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* KPI Cards */}
+      {/* 2. Top 4 KPI Cards (Stitch Obsidian Layout) */}
       {simData && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 font-mono">
-          <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-1">
-            <span className="text-[10px] uppercase font-bold text-slate-400">Year-One Spend</span>
-            <div className="text-xl font-extrabold text-slate-900 dark:text-white">
-              {currencyMode === "usd" ? `$${simData.year1_gcc_usd_m}M` : `₹${simData.year1_gcc_inr_cr} Cr`}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Card 1: Year 1 Setup */}
+          <Card padding="md" className="flex flex-col justify-between">
+            <div className="flex items-center justify-between text-content-muted text-xs font-geist uppercase font-semibold tracking-wider">
+              <span>Year 1 Spend</span>
+              <Building className="w-4 h-4 text-content-muted" />
             </div>
-            <div className="text-[10px] text-slate-500 font-sans">Includes upfront capex + year-1 payroll</div>
-          </div>
+            <div className="my-3">
+              <div className="text-3xl font-bold font-mono text-content-primary tracking-tight">
+                {currency === "usd"
+                  ? `US$${simData.year1_gcc_usd_m.toFixed(2)}M`
+                  : `₹${simData.year1_gcc_inr_cr.toFixed(1)}Cr`}
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                Capex &amp; running cost for {headcount} FTEs
+              </div>
+            </div>
+            <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+              <div className="bg-secondary h-full rounded-full" style={{ width: "32%" }} />
+            </div>
+          </Card>
 
-          <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-1">
-            <span className="text-[10px] uppercase font-bold text-slate-400">5-Year GCC Spend</span>
-            <div className="text-xl font-extrabold text-slate-900 dark:text-white">
-              {currencyMode === "usd" ? `$${simData.five_year_gcc_usd_m}M` : `₹${simData.five_year_gcc_inr_cr} Cr`}
+          {/* Card 2: 5-Year Cumulative TCO */}
+          <Card padding="md" className="flex flex-col justify-between">
+            <div className="flex items-center justify-between text-content-muted text-xs font-geist uppercase font-semibold tracking-wider">
+              <span>5-Year Cumulative TCO</span>
+              <DollarSign className="w-4 h-4 text-primary" />
             </div>
-            <div className="text-[10px] text-slate-500 font-sans">9.8% yearly escalation + 12% allowance</div>
-          </div>
+            <div className="my-3">
+              <div className="text-3xl font-bold font-mono text-content-primary tracking-tight">
+                {currency === "usd"
+                  ? `US$${simData.five_year_gcc_usd_m.toFixed(2)}M`
+                  : `₹${simData.five_year_gcc_inr_cr.toFixed(1)}Cr`}
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                vs{" "}
+                <span className="font-mono text-content-secondary font-medium">
+                  {currency === "usd"
+                    ? `US$${simData.five_year_hq_usd_m.toFixed(2)}M`
+                    : `₹${simData.five_year_hq_inr_cr.toFixed(1)}Cr`}
+                </span>{" "}
+                HQ spend
+              </div>
+            </div>
+            <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+              <div className="bg-primary h-full rounded-full" style={{ width: "42%" }} />
+            </div>
+          </Card>
 
-          <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-1">
-            <span className="text-[10px] uppercase font-bold text-slate-400">5-Year HQ Retained</span>
-            <div className="text-xl font-extrabold text-slate-700 dark:text-slate-300">
-              {currencyMode === "usd" ? `$${simData.five_year_hq_usd_m}M` : `₹${simData.five_year_hq_inr_cr} Cr`}
+          {/* Card 3: 5-Year Net Saving */}
+          <Card padding="md" className="flex flex-col justify-between border-secondary/30 bg-surface-card relative overflow-hidden">
+            <div className="flex items-center justify-between text-secondary text-xs font-geist uppercase font-semibold tracking-wider">
+              <span>5-Year Net Saving</span>
+              <span className="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-mono text-[10px] font-bold">
+                {((simData.five_year_saving_usd_m / simData.five_year_hq_usd_m) * 100).toFixed(0)}% delta
+              </span>
             </div>
-            <div className="text-[10px] text-slate-500 font-sans">Equivalent team retained at headquarters</div>
-          </div>
+            <div className="my-3">
+              <div className="text-3xl font-bold font-mono text-secondary tracking-tight">
+                {currency === "usd"
+                  ? `US$${simData.five_year_saving_usd_m.toFixed(2)}M`
+                  : `₹${simData.five_year_saving_inr_cr.toFixed(1)}Cr`}
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                Direct margin lift over 60 months
+              </div>
+            </div>
+            <div className="flex items-center gap-1 text-xs text-secondary font-geist font-medium">
+              <TrendingDown className="w-3.5 h-3.5" />
+              <span>
+                +${(simData.five_year_saving_usd_m / 5).toFixed(2)}M net run-rate / yr
+              </span>
+            </div>
+          </Card>
 
-          <div className="p-4 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl shadow-sm space-y-1">
-            <span className="text-[10px] uppercase font-bold text-emerald-800 dark:text-emerald-300">5-Year Saving</span>
-            <div className="text-xl font-extrabold text-emerald-700 dark:text-emerald-300">
-              {currencyMode === "usd" ? `$${simData.five_year_saving_usd_m}M` : `₹${simData.five_year_saving_inr_cr} Cr`}
+          {/* Card 4: Break-Even Horizon */}
+          <Card padding="md" className="flex flex-col justify-between">
+            <div className="flex items-center justify-between text-tertiary text-xs font-geist uppercase font-semibold tracking-wider">
+              <span>Break-Even Horizon</span>
+              <Calendar className="w-4 h-4 text-tertiary" />
             </div>
-            <div className="text-[10px] text-emerald-700/80 dark:text-emerald-300/80 font-sans">Cumulative net cash benefit</div>
-          </div>
-
-          <div className="p-4 bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-xl shadow-sm space-y-1">
-            <span className="text-[10px] uppercase font-bold text-purple-800 dark:text-purple-300">Break-Even Month</span>
-            <div className="text-xl font-extrabold text-purple-700 dark:text-purple-300">
-              {simData.break_even_month ? `Month ${simData.break_even_month}` : "None in 60M"}
+            <div className="my-3">
+              <div className="text-3xl font-bold font-mono text-tertiary tracking-tight">
+                {simData.break_even_month ? `Month ${simData.break_even_month}` : "None in 60m"}
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                STPI capex &amp; fitout amortization
+              </div>
             </div>
-            <div className="text-[10px] text-purple-700/80 dark:text-purple-300/80 font-sans">Full capex recoupment horizon</div>
-          </div>
+            <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+              <div
+                className="bg-tertiary h-full rounded-full"
+                style={{ width: `${((simData.break_even_month || 12) / 60) * 100}%` }}
+              />
+            </div>
+          </Card>
         </div>
       )}
 
-      {/* 60-Month Cost Curve */}
-      {simData && (
-        <CostChart
-          curves={simData.monthly_curves}
-          breakEvenMonth={simData.break_even_month}
-          currency={currencyMode}
-        />
-      )}
+      {/* 3. Parameter Controls Collapsible Card */}
+      <details className="group bg-surface-card border border-border-subtle rounded-2xl overflow-hidden transition-all shadow-sm">
+        <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-surface-container/50 select-none">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+              <Sliders className="w-4 h-4" />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-geist font-semibold text-sm text-content-primary">
+                Simulation Assumptions &amp; Model Inputs
+              </span>
+              <span className="text-xs text-content-muted font-mono px-2 py-0.5 rounded bg-surface-container-high">
+                {cityName} · {headcount} FTEs · {(costAdvantage * 100).toFixed(0)}% advantage · ₹{exchangeRate}/$
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 text-primary text-xs font-geist font-medium">
+            <span className="group-open:hidden">Modify Inputs</span>
+            <span className="hidden group-open:inline">Collapse</span>
+            <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+          </div>
+        </summary>
 
-      {/* Rule-Fit Evaluation Panel */}
-      {simData && simData.rule_fits && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div className="p-6 pt-2 border-t border-border-subtle/80 bg-surface-container-low/50 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-4">
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                Statutory Rule-Fit Evaluation
+              <label className="block text-xs font-geist font-medium text-content-secondary uppercase tracking-wider mb-1.5">
+                Target Metro Hub
+              </label>
+              <select
+                value={cityName}
+                onChange={(e) => setCityName(e.target.value)}
+                className="w-full h-9 rounded-lg bg-surface-container-low border border-border-subtle px-3 text-xs font-sans text-content-primary focus:border-primary focus:outline-none"
+              >
+                <option value="Bengaluru">Bengaluru (Tier 1 Metros)</option>
+                <option value="Hyderabad">Hyderabad (Tier 1 Metros)</option>
+                <option value="Pune">Pune (Tech Metros)</option>
+                <option value="Chennai">Chennai (Tier 1 Metros)</option>
+                <option value="NCR (Gurugram/Noida)">NCR (Gurugram / Noida)</option>
+                <option value="Coimbatore">Coimbatore (Tier 2 Growth)</option>
+              </select>
+            </div>
+
+            <Slider
+              label="Headcount (FTEs)"
+              value={headcount}
+              min={25}
+              max={500}
+              step={25}
+              unit=" pax"
+              onChange={setHeadcount}
+            />
+          </div>
+
+          <div className="space-y-4">
+            <Slider
+              label="Cost Advantage vs. HQ"
+              value={Math.round(costAdvantage * 100)}
+              min={20}
+              max={65}
+              step={5}
+              unit="%"
+              onChange={(v) => setCostAdvantage(v / 100)}
+            />
+            <Slider
+              label="Hidden Expat / Legal Allowance"
+              value={Math.round(hiddenCostAllowance * 100)}
+              min={5}
+              max={25}
+              step={1}
+              unit="%"
+              onChange={(v) => setHiddenCostAllowance(v / 100)}
+            />
+          </div>
+
+          <div className="space-y-3">
+            <label className="block text-xs font-geist font-medium text-content-secondary uppercase tracking-wider">
+              Core GCC Functional Scope
+            </label>
+            <div className="flex flex-wrap gap-1.5">
+              {FUNCTIONS.map((fn) => {
+                const isSelected = selectedFunctions.includes(fn.id);
+                return (
+                  <button
+                    key={fn.id}
+                    type="button"
+                    onClick={() => toggleFunction(fn.id)}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-geist font-medium transition-colors ${
+                      isSelected
+                        ? "bg-primary text-white shadow-sm font-semibold"
+                        : "bg-surface-container-high text-content-secondary hover:text-content-primary hover:bg-surface-container-highest"
+                    }`}
+                  >
+                    {fn.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </details>
+
+      {/* 4. Cumulative Expenditure Curve */}
+      {simData && (
+        <Card padding="md" className="space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-border-subtle">
+            <div className="space-y-0.5">
+              <h3 className="font-headline-md font-semibold text-content-primary">
+                60-Month Cumulative Expenditure Trajectory
               </h3>
-              <p className="text-xs text-slate-500">
-                Central and state regulatory triggers evaluated automatically against your headcount ({headcount}) and selected functions.
+              <p className="font-body-sm text-content-secondary">
+                India GCC spend curve versus equivalent headcount retained at parent headquarters
               </p>
             </div>
+
+            {/* Currency Switcher */}
+            <div className="inline-flex rounded-lg p-0.5 bg-surface-container-high border border-border-subtle text-xs font-geist">
+              <button
+                type="button"
+                onClick={() => setCurrency("usd")}
+                className={`px-2.5 py-1 rounded font-semibold transition-colors ${
+                  currency === "usd"
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-content-secondary hover:text-content-primary"
+                }`}
+              >
+                USD ($)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrency("inr")}
+                className={`px-2.5 py-1 rounded font-semibold transition-colors ${
+                  currency === "inr"
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-content-secondary hover:text-content-primary"
+                }`}
+              >
+                INR (₹)
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <CostChart
+            curves={simData.monthly_curves}
+            breakEvenMonth={simData.break_even_month}
+            currency={currency}
+          />
+        </Card>
+      )}
+
+      {/* 5. Navigation Tabs for Rules Fit & 90-Day Plan */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b border-border-subtle pb-3">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setActiveTab("overview")}
+              className={`px-3 py-1.5 text-xs font-geist font-semibold rounded-lg transition-colors ${
+                activeTab === "overview"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-content-secondary hover:text-content-primary hover:bg-surface-container"
+              }`}
+            >
+              Statutory Rules Fit ({simData?.rule_fits?.length || 0})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("roadmap")}
+              className={`px-3 py-1.5 text-xs font-geist font-semibold rounded-lg transition-colors ${
+                activeTab === "roadmap"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-content-secondary hover:text-content-primary hover:bg-surface-container"
+              }`}
+            >
+              90-Day Setup Checklist ({roadmapSteps.length})
+            </button>
+          </div>
+        </div>
+
+        {/* Tab 1: Statutory Rules Fit Matrix */}
+        {activeTab === "overview" && simData && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {simData.rule_fits.map((r) => {
-              const statusStyles: Record<string, string> = {
-                Applies: "bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700",
-                Check: "bg-amber-50 text-amber-800 border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-700",
-                Closed: "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700",
-                "Does not fit": "bg-rose-50 text-rose-800 border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700",
-                Opportunity: "bg-purple-50 text-purple-800 border-purple-300 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-700",
+              const statusStyles: Record<string, { badge: any; border: string }> = {
+                Applies: { badge: "success", border: "border-secondary/30" },
+                Check: { badge: "warning", border: "border-tertiary/30" },
+                Closed: { badge: "danger", border: "border-danger/30" },
+                "Does not fit": { badge: "neutral", border: "border-border-subtle" },
+                Opportunity: { badge: "primary", border: "border-primary/30" },
               };
+              const style = statusStyles[r.status] || statusStyles.Check;
 
               return (
-                <div
+                <Card
                   key={r.code}
-                  className="p-3.5 rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-850/40 space-y-1.5"
+                  padding="md"
+                  className={`flex flex-col justify-between space-y-3 ${style.border}`}
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-xs text-slate-900 dark:text-white">
-                      {r.title}
-                    </span>
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${statusStyles[r.status] || statusStyles.Check}`}>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-content-muted">
+                          {r.code}
+                        </span>
+                        <h4 className="font-geist font-semibold text-xs text-content-primary">
+                          {r.title}
+                        </h4>
+                      </div>
+                      <Badge variant={style.badge} size="sm">
                         {r.status}
-                      </span>
-                      <GradeStamp grade={r.grade} size="sm" />
+                      </Badge>
                     </div>
+                    <p className="text-xs text-content-secondary leading-relaxed font-sans">
+                      {r.text}
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
-                    {r.text}
-                  </p>
-                  {r.reason && (
-                    <div className="text-[11px] font-mono text-slate-500 pt-0.5">
-                      <strong>Trigger: </strong> {r.reason}
+
+                  <div className="flex items-center justify-between pt-2 border-t border-border-subtle/50 text-[11px]">
+                    <div className="text-content-muted italic">
+                      {r.reason ? `Condition: ${r.reason}` : "General statutory baseline"}
                     </div>
-                  )}
-                </div>
+                    <GradeStamp grade={r.grade} size="sm" />
+                  </div>
+                </Card>
               );
             })}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Sequenced Checklist */}
-      {roadmapSteps.length > 0 && <Checklist steps={roadmapSteps} />}
+        {/* Tab 2: 90-Day Execution Roadmap Checklist */}
+        {activeTab === "roadmap" && (
+          <div className="space-y-4">
+            <h3 className="font-headline-md font-semibold text-content-primary">
+              90-Day Setup Checklist (MCA SPICe+ &amp; RBI Filings)
+            </h3>
+            <Checklist steps={roadmapSteps} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

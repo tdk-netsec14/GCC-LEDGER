@@ -1,18 +1,21 @@
+"use client";
+
 import React from "react";
 import { Grade } from "@/lib/api";
 
-interface GradeStampProps {
+export interface GradeStampProps {
   grade: Grade | string;
   relayed?: boolean;
   size?: "sm" | "md" | "lg";
   showLabel?: boolean;
+  className?: string;
 }
 
 const GRADE_DESCRIPTIONS: Record<string, string> = {
   A: "Grade A — Primary statute, regulatory filing, or official gazette record opened directly.",
-  B: "Grade B — Industry association or professional firm report (audit, legal, real estate).",
-  C: "Grade C — Secondary press or news media reporting.",
-  D: "Grade D — Vendor directory, platform estimate, or unverified lead claim.",
+  B: "Grade B — Industry association or professional firm report (audit, legal, real estate advisory).",
+  C: "Grade C — Secondary press or published news media interview.",
+  D: "Grade D — Vendor claims, platform estimates, or unverified directory submissions.",
 };
 
 export const GradeStamp: React.FC<GradeStampProps> = ({
@@ -20,21 +23,22 @@ export const GradeStamp: React.FC<GradeStampProps> = ({
   relayed = false,
   size = "md",
   showLabel = false,
+  className = "",
 }) => {
-  const g = grade.toUpperCase();
+  const g = (grade || "D").toUpperCase();
   const desc = GRADE_DESCRIPTIONS[g] || `Grade ${g}`;
 
   const colorStyles: Record<string, string> = {
-    A: "bg-emerald-50 text-emerald-800 border-emerald-500 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-500",
-    B: "bg-blue-50 text-blue-800 border-blue-500 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-500",
-    C: "bg-amber-50 text-amber-800 border-amber-500 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-500",
-    D: "bg-slate-100 text-slate-700 border-slate-400 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-500",
+    A: "bg-secondary/15 text-secondary border-secondary/50",
+    B: "bg-primary/15 text-primary border-primary/50",
+    C: "bg-tertiary/15 text-tertiary border-tertiary/50",
+    D: "bg-surface-container-high text-content-secondary border-border-outline/50",
   };
 
   const sizeStyles: Record<string, string> = {
-    sm: "w-5 h-5 text-xs font-semibold",
-    md: "w-6 h-6 text-xs font-bold",
-    lg: "w-8 h-8 text-sm font-bold",
+    sm: "w-5 h-5 text-[11px] font-bold rounded",
+    md: "w-6 h-6 text-xs font-bold rounded-md",
+    lg: "w-8 h-8 text-sm font-black rounded-lg",
   };
 
   const styleClass = colorStyles[g] || colorStyles.D;
@@ -42,18 +46,19 @@ export const GradeStamp: React.FC<GradeStampProps> = ({
 
   return (
     <span
-      className="inline-flex items-center gap-1.5 align-middle select-none"
-      title={`${desc}${relayed ? " (Relayed claim: cited from secondary page without opening original)" : ""}`}
+      className={`inline-flex items-center gap-1.5 align-middle select-none font-geist ${className}`}
+      title={`${desc}${relayed ? " (Relayed source: cited from intermediary citation without opening primary record)" : ""}`}
     >
       <span
-        className={`inline-flex items-center justify-center rounded ${sizeClass} ${styleClass} ${
+        aria-label={`Evidence Grade ${g}${relayed ? " Relayed" : " Direct"}`}
+        className={`inline-flex items-center justify-center font-mono ${sizeClass} ${styleClass} ${
           relayed ? "border-2 border-dashed" : "border"
         }`}
       >
         {g}
       </span>
       {showLabel && (
-        <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+        <span className="text-xs font-medium text-content-secondary">
           Grade {g} {relayed && "(Relayed)"}
         </span>
       )}

@@ -1,0 +1,401 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-container": "#3e2400", "primary-container": "#8a80ff", "on-primary-fixed": "#140067", "error-container": "#93000a", "surface-container": "#18202b", "surface-bright": "#323a46", "surface-container-high": "#232a36", "on-tertiary-fixed-variant": "#653e00", "tertiary-fixed": "#ffddb8", "on-surface-variant": "#c8c4d6", "surface": "#0c141f", "tertiary-container": "#ca8100", "secondary": "#4edea3", "surface-dim": "#0c141f", "on-error": "#690005", "outline-variant": "#474554", "tertiary": "#ffb95f", "surface-tint": "#c5c0ff", "on-primary-container": "#20008f", "on-surface": "#dbe3f3", "surface-container-lowest": "#070f19", "outline": "#928f9f", "secondary-fixed": "#6ffbbe", "on-tertiary": "#472a00", "on-secondary": "#003824", "surface-variant": "#2d3541", "on-primary-fixed-variant": "#3e2db4", "inverse-on-surface": "#29313d", "inverse-surface": "#dbe3f3", "primary": "#c5c0ff", "surface-container-highest": "#2d3541", "on-secondary-fixed-variant": "#005236", "background": "#0c141f", "inverse-primary": "#564acd", "on-secondary-fixed": "#002113", "secondary-container": "#00a572", "tertiary-fixed-dim": "#ffb95f", "on-background": "#dbe3f3", "on-primary": "#26039f", "error": "#ffb4ab", "surface-container-low": "#141c27", "secondary-fixed-dim": "#4edea3", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#c5c0ff", "primary-fixed": "#e4dfff", "on-error-container": "#ffdad6", "on-secondary-container": "#00311f" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.25rem", "space-lg": "1.25rem", "space-sm": "0.5rem", "margin": "1.75rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-md": "0.875rem", "space-xl": "1.75rem", "space-2xl": "2.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-xl-mobile": ["Inter"], "display-lg": ["Inter"], "label-lg": ["Geist"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "label-md": ["Geist"], "body-md": ["Inter"], "label-caps": ["Geist"], "headline-lg": ["Inter"], "headline-xl": ["Inter"] }, "fontSize": { "headline-xl-mobile": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-lg": ["3rem", { "lineHeight": "1.15", "letterSpacing": "-0.03em", "fontWeight": "700" }], "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0", "fontWeight": "500" }], "body-sm": ["0.75rem", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["1rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "headline-md": ["1.125rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }], "label-md": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "label-caps": ["0.6875rem", { "lineHeight": "1.15", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-lg": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-xl": ["2rem", { "lineHeight": "1.25", "letterSpacing": "-0.025em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.35)]"><div class="flex flex-col h-full overflow-hidden"><div class="px-space-lg pt-space-lg pb-space-md flex flex-col gap-space-xs bg-surface-container-lowest"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">verified</span></div><span class="font-headline-md text-headline-md tracking-tight font-semibold text-on-surface">GCC Ledger</span></div><span class="font-label-caps text-label-caps uppercase px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">v4.2</span></div><div class="flex items-center gap-space-xs pl-9"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Evidentiary Audit</span></div></div><div class="flex-1 overflow-y-auto px-space-md py-space-sm space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-caps text-label-caps uppercase text-outline tracking-wider block">Overview</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-1.5 transition-all bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="national-ledger" href="#"><span class="material-symbols-outlined text-[18px]">account_balance</span><span class="font-label-lg text-label-lg">National Ledger</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-caps text-label-caps uppercase text-outline tracking-wider block">Explore</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="directory" href="#"><span class="material-symbols-outlined text-[18px]">corporate_fare</span><span class="font-label-lg text-label-lg">Directory</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="city-lab" href="#"><span class="material-symbols-outlined text-[18px]">hub</span><span class="font-label-lg text-label-lg">City Lab</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-caps text-label-caps uppercase text-outline tracking-wider block">Plan</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="setup-simulator" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-label-lg text-label-lg">Setup Simulator</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="setup-guide" href="#"><span class="material-symbols-outlined text-[18px]">map</span><span class="font-label-lg text-label-lg">Setup Guide</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-caps text-label-caps uppercase text-outline tracking-wider block">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="signal-radar" href="#"><span class="material-symbols-outlined text-[18px]">radar</span><span class="font-label-lg text-label-lg">Signal Radar</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="contradiction-audits" href="#"><span class="material-symbols-outlined text-[18px]">rule</span><span class="font-label-lg text-label-lg">Contradiction Audits</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="provider-proof" href="#"><span class="material-symbols-outlined text-[18px]">verified_user</span><span class="font-label-lg text-label-lg">Provider Proof</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ask-the-ledger" href="#"><span class="material-symbols-outlined text-[18px]">psychology</span><span class="font-label-lg text-label-lg">Ask the Ledger</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-caps text-label-caps uppercase text-outline tracking-wider block">Reference</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="state-register" href="#"><span class="material-symbols-outlined text-[18px]">dataset</span><span class="font-label-lg text-label-lg">State Register</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="source-register" href="#"><span class="material-symbols-outlined text-[18px]">source</span><span class="font-label-lg text-label-lg">Source Register</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="reviewer-workspace" href="#"><span class="material-symbols-outlined text-[18px]">shield_person</span><span class="font-label-lg text-label-lg">Reviewer Workspace</span></a></nav></div></div><div class="p-space-md bg-surface-container-low rounded-t-xl mx-space-sm mb-space-sm space-y-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">Level 3 Verified</span></div><span class="font-label-caps text-label-caps text-outline bg-surface-container-high px-1.5 py-0.5 rounded">ISO-27001</span></div><div class="flex items-center justify-between pt-1"><span class="font-label-caps text-label-caps text-outline font-mono truncate max-w-[140px]">SHA-256: 9b2d...f41a</span><span class="material-symbols-outlined text-outline text-[14px]">lock</span></div></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-outline"><span class="font-label-md text-label-md">Audits</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="font-label-md text-label-md text-on-surface">Executive Dashboard</span></div><div class="h-4 w-px bg-surface-container-highest"></div><div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg"><span class="font-label-caps text-label-caps text-outline px-1.5 uppercase">Floor:</span><div class="flex items-center gap-0.5 bg-surface-container-high rounded p-0.5"><button class="px-2 py-0.5 font-label-caps text-label-caps rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button">A</button><button class="px-2 py-0.5 font-label-caps text-label-caps rounded bg-secondary-container text-on-secondary-container font-semibold" type="button">B</button><button class="px-2 py-0.5 font-label-caps text-label-caps rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button">C</button><button class="px-2 py-0.5 font-label-caps text-label-caps rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button">D</button></div><button class="px-2 py-1 rounded font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1" type="button"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Direct only</button><div class="px-2 py-0.5 rounded bg-surface-container-high flex items-center gap-1.5"><span class="font-label-caps text-label-caps text-secondary font-mono font-medium">1,428 / 1,850</span><span class="font-label-caps text-label-caps text-outline">pass floor</span></div><button class="text-outline hover:text-on-surface transition-colors p-1 flex items-center" title="Evidence Floor Info" type="button"><span class="material-symbols-outlined text-[16px]">info</span></button></div></div><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span><input class="w-56 h-8 bg-surface-container-low rounded-lg pl-8 pr-3 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search hash, entity or signal..." type="text"></div><button class="relative p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="max-w-[1200px] mx-auto px-space-lg py-space-xl"><div class="flex flex-col w-full">
+<!-- SECTION: Strategic Headline & Epistemic Subtitle (Rule 1: One Clear Question) -->
+<section class="flex flex-col gap-space-sm mb-10">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        Q1 Consensus Audit Active
+      </span>
+<span class="text-outline font-label-caps text-label-caps">•</span>
+<span class="text-outline font-label-caps text-label-caps uppercase tracking-wider">Pass Floor: Grade B Direct</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight max-w-4xl">
+      What is the current institutional consensus on India's GCC ecosystem?
+    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+      Verified intelligence synthesised from statutory filings, audited disclosures, and regulatory gazettes.
+    </p>
+</section>
+<!-- SECTION: 4 Prominent KPI Cards (Rule 5: Progressive Disclosure Anchors) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+<!-- Card 1: Verified GCC Span -->
+<div class="group relative flex flex-col justify-between p-space-lg rounded-xl bg-surface-container-low transition-all duration-200 hover:bg-surface-container shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Verified GCC Span</span>
+<span class="material-symbols-outlined text-[18px] text-primary">domain_verification</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-semibold text-on-surface tracking-tight">1,580 — 1,750</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="inline-flex items-center font-label-md text-label-md text-tertiary">
+<span class="material-symbols-outlined text-[15px] mr-0.5">filter_alt</span>
+            Δ -650 unvetted leases filtered
+          </span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase font-medium">
+            Grade A/B Compliant
+          </span>
+</div>
+</div>
+<div class="pt-4 mt-4 bg-transparent">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-primary-container transition-colors" href="#">
+          View National Ledger
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Metros & Hubs -->
+<div class="group relative flex flex-col justify-between p-space-lg rounded-xl bg-surface-container-low transition-all duration-200 hover:bg-surface-container shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Tier-1 &amp; 2 Ranked</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">hub</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-semibold text-on-surface tracking-tight">14 Metros &amp; Hubs</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+            Top 3: Bengaluru, Hyderabad, Pune
+          </span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-caps text-label-caps">
+            Blended Cost Index: 0.38 vs NYC
+          </span>
+</div>
+</div>
+<div class="pt-4 mt-4 bg-transparent">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-primary-container transition-colors" href="#">
+          Compare in City Lab
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: Statutory Rules Active -->
+<div class="group relative flex flex-col justify-between p-space-lg rounded-xl bg-surface-container-low transition-all duration-200 hover:bg-surface-container shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Statutory Rules Active</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">balance</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-semibold text-on-surface tracking-tight">48 Checkpoints</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="inline-flex items-center gap-1 text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+            100% CIN cross-checked
+          </span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase">
+            RBI • MCA • SEZ Gazettes
+          </span>
+</div>
+</div>
+<div class="pt-4 mt-4 bg-transparent">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-primary-container transition-colors" href="#">
+          Run Setup Simulator
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: High-Confidence Signals -->
+<div class="group relative flex flex-col justify-between p-space-lg rounded-xl bg-surface-container-low transition-all duration-200 hover:bg-surface-container shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Signals Watched</span>
+<span class="material-symbols-outlined text-[18px] text-primary">radar</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-semibold text-on-surface tracking-tight">12 Active Signals</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="inline-flex items-center font-label-md text-label-md text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span>
+            84% Warming / Expansion
+          </span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase">
+            3 Tier-2 Greenfield Mandates
+          </span>
+</div>
+</div>
+<div class="pt-4 mt-4 bg-transparent">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-primary-container transition-colors" href="#">
+          Open Signal Radar
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- SECTION: Featured Primary Visual Chart (Rule 3: One Visual Anchor) -->
+<section class="flex flex-col p-space-xl rounded-xl bg-surface-container-low mb-12 shadow-sm">
+<!-- Chart Header & Drawer Control -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-sm bg-primary"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+            Consensus Dispersion &amp; Evidence Floor Band
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Filtering marketing estimates against statutory auditor statements (MCA-21) and direct payroll filings.
+        </p>
+</div>
+<!-- Action Button for Progressive Disclosure Drawer -->
+<button class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors font-label-md text-label-md self-start lg:self-auto cursor-pointer shadow-sm" onclick="toggleAuditDrawer()" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">account_tree</span>
+<span>View Methodology &amp; Full Audit Drawer</span>
+</button>
+</div>
+<!-- Chart Visual Canvas (Pure Inline SVG for pixel-sharp layout) -->
+<div class="w-full bg-surface-container-lowest p-6 rounded-lg relative overflow-x-auto">
+<div class="min-w-[740px]">
+<!-- Coordinate Labels Top -->
+<div class="flex justify-between text-outline font-label-caps text-label-caps uppercase tracking-wider mb-2 px-4">
+<span>Lower Bound (1,400)</span>
+<span class="text-secondary font-semibold">Institutional Consensus Corridor [1,580 — 1,750]</span>
+<span class="text-error">Suppressed Claim (2,400)</span>
+</div>
+<!-- The Visual Range Plot -->
+<div class="relative w-full h-28 flex items-center px-4">
+<!-- Background Axis Track -->
+<div class="absolute inset-x-4 h-1.5 bg-surface-variant rounded-full"></div>
+<!-- Highlight Band: Institutional Consensus [1,580 to 1,750] -->
+<!-- Scaled mapping: 1,400 = 0%, 2,500 = 100% (delta = 1100). 1580 => 16.3%, 1750 => 31.8% -->
+<div class="absolute left-[16.3%] w-[15.5%] h-12 bg-primary/10 rounded-lg flex items-center justify-center pointer-events-none">
+<span class="text-[10px] uppercase font-mono tracking-wider text-primary font-medium opacity-80">95% Bayesian Confidence</span>
+</div>
+<!-- Threshold Floor Marker Line at Grade B cutoff -->
+<div class="absolute left-[33.5%] h-16 w-0.5 bg-secondary-container flex flex-col items-center justify-between pointer-events-none">
+<span class="text-[9px] font-mono text-secondary -mt-5 uppercase px-1 rounded bg-surface-container-high whitespace-nowrap">Evidence Floor Cutoff</span>
+</div>
+<!-- Marker 1: NASSCOM (1,580 [Grade B]) => 16.3% -->
+<div class="absolute left-[16.3%] -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<div class="w-3.5 h-3.5 rounded-full bg-secondary shadow-md group-hover:scale-125 transition-transform flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-surface-container-lowest rounded-full"></div>
+</div>
+<div class="absolute top-5 flex flex-col items-center whitespace-nowrap pointer-events-none">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">NASSCOM</span>
+<span class="text-[10px] font-mono text-outline">1,580 • Gr. B</span>
+</div>
+</div>
+<!-- Marker 2: Weighted Bayesian Center (1,642) => 22% -->
+<div class="absolute left-[22%] -translate-x-1/2 flex flex-col items-center z-10 group cursor-pointer">
+<div class="w-5 h-5 rotate-45 bg-primary shadow-lg group-hover:scale-125 transition-transform flex items-center justify-center">
+<div class="w-2 h-2 bg-on-primary rounded-xs"></div>
+</div>
+<div class="absolute -top-7 flex flex-col items-center whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-mono text-[11px] font-bold shadow-md">
+                Median: 1,642
+              </span>
+</div>
+</div>
+<!-- Marker 3: Ministry of Corporate Affairs (1,610 [Grade A]) => 19.1% -->
+<div class="absolute left-[19.1%] -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-secondary-fixed shadow-md group-hover:scale-125 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-on-secondary-fixed">verified</span>
+</div>
+<div class="absolute top-5 flex flex-col items-center whitespace-nowrap pointer-events-none">
+<span class="font-label-caps text-label-caps text-secondary font-semibold">MCA Filings</span>
+<span class="text-[10px] font-mono text-outline">1,610 • Gr. A</span>
+</div>
+</div>
+<!-- Marker 4: BCG Research (1,650 [Grade B]) => 22.7% -->
+<div class="absolute left-[24.5%] -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<div class="w-3.5 h-3.5 rounded-full bg-secondary shadow-md group-hover:scale-125 transition-transform flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-surface-container-lowest rounded-full"></div>
+</div>
+<div class="absolute top-5 flex flex-col items-center whitespace-nowrap pointer-events-none">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">BCG Audit</span>
+<span class="text-[10px] font-mono text-outline">1,650 • Gr. B</span>
+</div>
+</div>
+<!-- Filtered Outlier: Commercial Real Estate Deck (2,400 [Grade D, hidden below floor]) => 90.9% -->
+<div class="absolute left-[90.9%] -translate-x-1/2 flex flex-col items-center group cursor-pointer opacity-50 hover:opacity-100 transition-opacity">
+<div class="w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</div>
+<div class="absolute top-5 flex flex-col items-center whitespace-nowrap">
+<span class="font-label-caps text-label-caps text-error font-semibold line-through">CRE Broker Deck</span>
+<span class="text-[10px] font-mono text-error">2,400 • Gr. D [Filtered]</span>
+</div>
+</div>
+</div>
+<!-- Legend and Explanatory Footing -->
+<div class="mt-8 pt-4 flex flex-wrap items-center justify-between gap-4 bg-surface-container-high/40 px-4 py-2.5 rounded-lg text-body-sm">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-label-md text-label-md">Statutory Filings (Passed Floor)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rotate-45 bg-primary"></span>
+<span class="text-on-surface font-label-md text-label-md">Synthesised Bayesian Weighted Value</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="w-1 h-1 rounded-full bg-error"></span>
+</span>
+<span class="text-outline font-label-md text-label-md">Self-Reported PR / Unvetted Leases (Filtered)</span>
+</div>
+</div>
+<span class="font-mono text-outline font-label-caps text-label-caps">Formula: W_Score = Σ(GradeWeight_i × Scope_i) / Σ(W_i)</span>
+</div>
+</div>
+</div>
+<!-- Hidden Progressive Disclosure Drawer (Opens smoothly when user asks for mechanics) -->
+<div class="hidden mt-6 p-6 rounded-lg bg-surface-container-high transition-all" id="methodologyDrawer">
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<span class="text-primary font-label-caps text-label-caps uppercase tracking-wider block mb-1">Audit Methodology &amp; Weights</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">How GCC Ledger Cleans Unaudited Marketing Numbers</h3>
+</div>
+<button class="text-outline hover:text-on-surface p-1" onclick="toggleAuditDrawer()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-body-sm text-body-sm text-on-surface-variant">
+<div class="p-4 rounded-lg bg-surface-container-lowest">
+<div class="font-semibold text-secondary mb-1">Grade A: MCA-21 &amp; RBI Filings (Weight: 1.0)</div>
+<p>Verified against active Indian Subsidiary Corporate Identity Numbers (CIN), direct director signatures, and audited Balance Sheet schedules.</p>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-lowest">
+<div class="font-semibold text-primary mb-1">Grade B: Audited Body Disclosures (Weight: 0.7)</div>
+<p>NASSCOM, ER&amp;D Consortium, and Tier-1 Management Consulting whitepapers that cite registered employee headcount and SEZ export zones.</p>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-lowest">
+<div class="font-semibold text-error mb-1">Grade D: Speculative Leases (Weight: 0.0)</div>
+<p>Real estate developer announcements, co-working aggregators, and unverified news bytes are suppressed from executive aggregates to prevent double counting.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: Quick 'Explore Intelligence Tools' Grid (Rule 5: Max 3 per row, clean direct links) -->
+<section class="flex flex-col mb-14">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Explore Intelligence Tools</h2>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Direct modules for statutory verification, city economics, and captive sizing.</p>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">4 Engines Online</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+<!-- Tool 1: National Ledger & Source Audits -->
+<a class="group p-6 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between shadow-sm" href="#">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container-highest text-secondary">1,428 Verified CINs</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-2 group-hover:text-primary transition-colors">
+            National Ledger &amp; Source Audits
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Deep-dive into company CIN filings, statutory auditor balance sheets, and historical entity timeline registers.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-1 font-label-md text-label-md text-primary font-medium">
+<span>Search corporate entities</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Tool 2: City Lab Benchmark -->
+<a class="group p-6 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between shadow-sm" href="#">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant">14 Indian Hubs</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-2 group-hover:text-secondary transition-colors">
+            City Lab Benchmark
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Evaluate tech talent density, average engineer attrition, and Grade-A infrastructure costs across Indian metros.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-1 font-label-md text-label-md text-secondary font-medium">
+<span>Open comparative matrix</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Tool 3: Setup Simulator (4-Step Guided Flow) -->
+<a class="group p-6 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between shadow-sm" href="#">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[22px]">tune</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container-highest text-tertiary">4-Step Guided Flow</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-2 group-hover:text-tertiary transition-colors">
+            Setup Simulator &amp; TCO Modeler
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Calculate 5-year captive TCO versus HQ spend with regulatory milestone checks, STPI exemptions, and staffing ramps.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-1 font-label-md text-label-md text-tertiary font-medium">
+<span>Model new captive footprint</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Tool 4: Signal Radar & Provider Proof -->
+<a class="group p-6 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between shadow-sm" href="#">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[22px]">radar</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container-highest text-secondary">Verified Proof Only</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-2 group-hover:text-primary transition-colors">
+            Signal Radar &amp; Provider Proof
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Monitor real-time market movements, executive leadership transfers, and audited partner credibility ratios.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-1 font-label-md text-label-md text-primary font-medium">
+<span>Inspect real-time signals</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</section>
+<!-- SECTION: Compliance & Epistemic Disclaimer (Calm, Minimal Footer Notice) -->
+<footer class="pt-6 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-outline font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Official Public Source Ledger. Figures are claims read from statutory filings on the date recorded; not legal, tax, or investment advice.</span>
+</div>
+<div class="flex items-center gap-4 text-outline font-label-caps text-label-caps shrink-0">
+<span class="hover:text-on-surface cursor-pointer">Protocol v4.2</span>
+<span>•</span>
+<span class="hover:text-on-surface cursor-pointer">CIN Register Index</span>
+<span>•</span>
+<span class="hover:text-on-surface cursor-pointer">Audit Ledger SHA-256</span>
+</div>
+</footer>
+</div>
+<script>
+  function toggleAuditDrawer() {
+    const drawer = document.getElementById('methodologyDrawer');
+    if (drawer) {
+      drawer.classList.toggle('hidden');
+    }
+  }
+</script></div></main></div></body></html>

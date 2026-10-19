@@ -6,16 +6,25 @@ import { useEvidence } from "@/lib/evidence-context";
 import { GradeStamp } from "@/components/GradeStamp";
 import { HiddenCount } from "@/components/HiddenCount";
 import { EmptyState } from "@/components/EmptyState";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Table, Column } from "@/components/ui/Table";
+import { Badge } from "@/components/ui/Badge";
+import { Modal } from "@/components/ui/Modal";
 import {
   Building2,
-  CheckCircle2,
-  ExternalLink,
-  Filter,
-  PlusCircle,
-  RefreshCw,
   Search,
-  ShieldAlert,
+  PlusCircle,
   X,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Shield,
+  Layers,
+  CheckCircle2,
+  AlertCircle,
+  Filter,
 } from "lucide-react";
 
 export default function DirectoryPage() {
@@ -28,8 +37,8 @@ export default function DirectoryPage() {
   // Filters
   const [search, setSearch] = useState("");
   const [cityFilter, setCityFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
+  const pageSize = 8;
 
   // Lead Submission Modal
   const [leadModalOpen, setLeadModalOpen] = useState(false);
@@ -49,9 +58,8 @@ export default function DirectoryPage() {
         direct_only: directOnly,
         q: search || undefined,
         city: cityFilter || undefined,
-        status: statusFilter || undefined,
         page,
-        page_size: 20,
+        page_size: pageSize,
       });
       setData(res);
     } catch (err: any) {
@@ -63,323 +71,364 @@ export default function DirectoryPage() {
 
   useEffect(() => {
     fetchDirectory();
-  }, [floor, directOnly, cityFilter, statusFilter, page]);
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setPage(1);
-    fetchDirectory();
-  };
+  }, [search, cityFilter, page, floor, directOnly]);
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!leadCompany || !leadCity) return;
     setSubmittingLead(true);
     try {
-      const res = await api.submitLead({
+      await api.submitLead({
         company_name: leadCompany,
         city: leadCity,
         status: leadStatus,
         source_url: leadUrl || undefined,
       });
-      setLeadSuccessMsg(res.message);
+      setLeadSuccessMsg("Lead submitted to reviewer queue with draft Grade D.");
       setLeadCompany("");
       setLeadUrl("");
       setTimeout(() => {
         setLeadModalOpen(false);
         setLeadSuccessMsg(null);
-        fetchDirectory();
-      }, 2500);
+      }, 1500);
     } catch (err: any) {
-      alert(err?.message || "Lead submission failed.");
+      console.error(err);
     } finally {
       setSubmittingLead(false);
     }
   };
 
+  const columns: Column<Company>[] = [
+    {
+      key: "name",
+      header: "Entity & Parent Company",
+      sortable: true,
+      render: (r) => (
+        <div className="space-y-0.5">
+          <span className="font-geist font-semibold text-content-primary">{r.name}</span>
+          <div className="text-[11px] text-content-muted font-geist flex items-center gap-1.5">
+            <span>HQ: {r.hq_country || "Global"}</span>
+            {r.sector && (
+              <>
+                <span>•</span>
+                <span>{r.sector}</span>
+              </>
+            )}
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "records",
+      header: "Indian Hubs",
+      render: (r) => (
+        <div className="flex flex-wrap gap-1">
+          {r.records && r.records.length > 0 ? (
+            r.records.map((rec) => (
+              <span
+                key={rec.id}
+                className="px-2 py-0.5 rounded bg-surface-container-high text-[11px] text-content-secondary font-mono border border-border-subtle"
+              >
+                {rec.city_name} ({rec.status})
+              </span>
+            ))
+          ) : (
+            <span className="text-content-muted text-xs">—</span>
+          )}
+        </div>
+      ),
+    },
+    {
+      key: "captive_status",
+      header: "Captive Test",
+      align: "center",
+      render: (r) => {
+        const isCaptive = r.captive_status === "yes";
+        const isNotCaptive = r.captive_status === "no";
+
+        return (
+          <Badge
+            variant={isCaptive ? "success" : isNotCaptive ? "danger" : "neutral"}
+            size="sm"
+            dot
+          >
+            {isCaptive
+              ? "Wholly-Owned Captive"
+              : isNotCaptive
+              ? "Non-Captive / Outsource"
+              : "Unreviewed"}
+          </Badge>
+        );
+      },
+    },
+    {
+      key: "grade",
+      header: "Grade Stamp",
+      align: "center",
+      render: (r) => <GradeStamp grade={r.grade} relayed={r.relayed} size="sm" showLabel />,
+    },
+  ];
+
+  const totalPages = data ? Math.ceil(data.total / pageSize) : 1;
+
   return (
-    <div className="space-y-6 animate-fade-in">
-      {/* Header & Lead Action */}
-      <div className="flex flex-wrap items-baseline justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            GCC Directory
+    <div className="space-y-8 animate-fade-in max-w-[1240px]">
+      {/* 1. Header with Plain Headline and Action Button */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="font-geist text-xs font-semibold uppercase text-secondary tracking-wider">
+              Entity Directory // Institutional Footprint
+            </span>
+            <span className="text-content-muted">•</span>
+            <span className="font-geist text-xs text-content-muted font-mono">REG-2026-FTE</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-headline-xl text-content-primary font-bold tracking-tight">
+            Which global companies operate verified GCCs in India?
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
-            Directory of active, expanding, and announced captive centers in India, with rigorous captive validation to exclude third-party IT outsourcing delivery hubs.
+          <p className="text-body-md text-content-secondary max-w-3xl leading-relaxed">
+            Audited institutional registry tracking wholly owned captives versus third-party IT outsourcing centres. IT delivery centres run for multiple clients are tagged to prevent inflation of official captive statistics.
           </p>
         </div>
 
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          icon={<PlusCircle className="w-4 h-4" />}
           onClick={() => setLeadModalOpen(true)}
-          className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-slate-800 shadow-sm"
+          className="self-start sm:self-auto shrink-0"
         >
-          <PlusCircle className="w-4 h-4" />
-          Submit a Lead
-        </button>
+          Propose Entity
+        </Button>
       </div>
 
-      {/* Filter Bar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm space-y-3">
-        <form onSubmit={handleSearchSubmit} className="flex flex-wrap gap-3">
-          <div className="relative flex-1 min-w-[240px]">
-            <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search company name, sector, or reason..."
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-slate-900"
-            />
-          </div>
+      {/* Hidden Count Banner */}
+      {data && <HiddenCount count={data.hidden_count} itemName="entity records" />}
 
+      {/* 2. Top 3 KPI Cards */}
+      {data && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <Card padding="md" className="flex flex-col justify-between">
+            <span className="text-xs font-geist font-semibold uppercase tracking-wider text-content-muted">
+              Matching Entities
+            </span>
+            <div className="my-2">
+              <div className="text-2xl sm:text-3xl font-bold font-mono text-content-primary">
+                {data.total} Entities
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                Filtered at Evidence Floor {floor}
+              </div>
+            </div>
+            <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+              <div className="bg-primary h-full rounded-full" style={{ width: "75%" }} />
+            </div>
+          </Card>
+
+          <Card padding="md" className="flex flex-col justify-between">
+            <span className="text-xs font-geist font-semibold uppercase tracking-wider text-secondary">
+              Captive Test Passed
+            </span>
+            <div className="my-2">
+              <div className="text-2xl sm:text-3xl font-bold font-mono text-secondary">
+                100% Wholly Owned
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                Servicing parent enterprise exclusively
+              </div>
+            </div>
+            <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+              <div className="bg-secondary h-full rounded-full" style={{ width: "100%" }} />
+            </div>
+          </Card>
+
+          <Card padding="md" className="flex flex-col justify-between">
+            <span className="text-xs font-geist font-semibold uppercase tracking-wider text-content-muted">
+              Active Triage Queue
+            </span>
+            <div className="my-2">
+              <div className="text-2xl sm:text-3xl font-bold font-mono text-tertiary">
+                Grade D Leads
+              </div>
+              <div className="text-xs text-content-muted mt-1">
+                Submissions awaiting primary gazette verification
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-content-secondary">
+              <span>Rigor Floor:</span>
+              <GradeStamp grade={floor} size="sm" />
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* 3. Filter Bar (Obsidian Search & Corridor Filter) */}
+      <Card padding="sm" className="flex flex-wrap items-center gap-3">
+        <div className="flex-1 min-w-[220px]">
+          <Input
+            value={search}
+            aria-label="Search by company name, sector or parent entity"
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            placeholder="Search by company name, sector or parent entity..."
+            icon={<Search className="w-4 h-4" />}
+          />
+        </div>
+
+        <div className="w-48">
           <select
             value={cityFilter}
+            aria-label="Filter by tech corridor"
             onChange={(e) => {
               setCityFilter(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 text-slate-900 dark:text-white focus:outline-none"
+            className="w-full h-[38px] rounded-lg bg-surface-container-low text-content-primary border border-border-subtle px-3 text-xs font-sans focus:border-primary focus:outline-none"
           >
-            <option value="">All Cities</option>
+            <option value="">All Tech Corridors</option>
             <option value="Bengaluru">Bengaluru</option>
             <option value="Hyderabad">Hyderabad</option>
             <option value="Pune">Pune</option>
-            <option value="Mumbai">Mumbai</option>
             <option value="Chennai">Chennai</option>
-            <option value="Gurugram">Gurugram</option>
-            <option value="Noida">Noida</option>
-            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="NCR">NCR (Gurugram/Noida)</option>
+            <option value="Coimbatore">Coimbatore</option>
           </select>
+        </div>
 
-          <select
-            value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value);
+        {(search || cityFilter) && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setSearch("");
+              setCityFilter("");
               setPage(1);
             }}
-            className="px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 text-slate-900 dark:text-white focus:outline-none"
           >
-            <option value="">All Presence Statuses</option>
-            <option value="landed">Landed</option>
-            <option value="expanding">Expanding</option>
-            <option value="announced">Announced</option>
-            <option value="not_captive">Not a Captive</option>
-          </select>
+            Clear Filters
+          </Button>
+        )}
+      </Card>
 
-          <button
-            type="submit"
-            className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 transition-colors"
-          >
-            Apply Filters
-          </button>
-        </form>
-      </div>
+      {/* 4. Enterprise Table */}
+      {data && (
+        <section className="space-y-4">
+          <Table
+            columns={columns}
+            data={data.items}
+            keyField="id"
+            emptyMessage="No verified GCC entities matched your filter criteria."
+          />
 
-      {/* Hidden Count Alert */}
-      {data && <HiddenCount count={data.hidden_count} itemName="companies" />}
-
-      {/* Main Directory Table */}
-      {loading ? (
-        <div className="flex items-center justify-center p-12 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-          <RefreshCw className="w-5 h-5 animate-spin text-slate-400 mr-2" />
-          <span className="text-xs text-slate-500">Loading verified directory records...</span>
-        </div>
-      ) : error ? (
-        <div className="p-4 bg-red-50 text-xs text-red-700 rounded-lg">{error}</div>
-      ) : data?.items.length === 0 ? (
-        <EmptyState
-          title="No companies match the current criteria"
-          message="No directory entries match your search filters and evidence floor. Try broadening your query or lowering the evidence floor."
-        />
-      ) : (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 font-medium border-b border-slate-200 dark:border-slate-800">
-                <tr>
-                  <th className="py-3 px-4">Company Name</th>
-                  <th className="py-3 px-4">HQ & Sector</th>
-                  <th className="py-3 px-4">Captive Test Status</th>
-                  <th className="py-3 px-4">Indian Footprint</th>
-                  <th className="py-3 px-4">Evidence Grade</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {data?.items.map((company) => {
-                  const isCaptive = company.captive_status === "yes";
-                  const isNotCaptive = company.captive_status === "no";
-
-                  return (
-                    <tr
-                      key={company.id}
-                      className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors"
-                    >
-                      <td className="py-3 px-4">
-                        <div className="font-semibold text-slate-900 dark:text-white">
-                          {company.name}
-                        </div>
-                        {company.captive_reason && (
-                          <div className="text-[11px] text-slate-500 mt-0.5 line-clamp-1" title={company.captive_reason}>
-                            {company.captive_reason}
-                          </div>
-                        )}
-                      </td>
-
-                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400">
-                        <div>{company.hq_country || "Global"}</div>
-                        <div className="text-[11px] text-slate-400">{company.sector || "Enterprise"}</div>
-                      </td>
-
-                      <td className="py-3 px-4">
-                        {isCaptive ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                            <CheckCircle2 className="w-3 h-3" />
-                            Wholly Owned Captive
-                          </span>
-                        ) : isNotCaptive ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
-                            <ShieldAlert className="w-3 h-3" />
-                            Not a Captive (Services)
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                            Unreviewed Lead
-                          </span>
-                        )}
-                      </td>
-
-                      <td className="py-3 px-4">
-                        <div className="flex flex-wrap gap-1.5">
-                          {company.records.map((r) => (
-                            <span
-                              key={r.id}
-                              className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-                            >
-                              {r.city_name} · <span className="capitalize">{r.status}</span>
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-
-                      <td className="py-3 px-4">
-                        <GradeStamp grade={company.grade} relayed={company.relayed} size="sm" showLabel />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between px-2 text-xs font-geist text-content-secondary">
+              <div>
+                Showing page <strong className="font-mono text-content-primary">{data.page}</strong> of{" "}
+                <strong className="font-mono text-content-primary">{totalPages}</strong> ({data.total} total)
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={page <= 1}
+                  onClick={() => setPage(page - 1)}
+                  icon={<ChevronLeft className="w-3.5 h-3.5" />}
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage(page + 1)}
+                >
+                  Next
+                  <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                </Button>
+              </div>
+            </div>
+          )}
+        </section>
       )}
 
-      {/* Lead Submission Modal */}
-      {leadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                Submit a GCC Directory Lead
-              </h3>
-              <button
-                type="button"
-                onClick={() => setLeadModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600"
+      {/* 5. Lead Proposal Modal */}
+      <Modal
+        isOpen={leadModalOpen}
+        onClose={() => setLeadModalOpen(false)}
+        title="Propose GCC Entity to Review Queue"
+        description="Submit a foreign parent company establishing operations in India. New submissions enter at Grade D with unreviewed captive status."
+      >
+        <form onSubmit={handleLeadSubmit} className="space-y-4 pt-2">
+          {leadSuccessMsg && (
+            <div className="p-3 rounded-lg bg-secondary/15 border border-secondary/30 text-secondary text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
+              <span>{leadSuccessMsg}</span>
+            </div>
+          )}
+
+          <Input
+            label="Company Name"
+            value={leadCompany}
+            onChange={(e) => setLeadCompany(e.target.value)}
+            placeholder="e.g. Stripe Technologies, Datadog..."
+            required
+          />
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-geist font-medium text-content-secondary uppercase tracking-wider mb-1.5">
+                Indian City / Location
+              </label>
+              <select
+                value={leadCity}
+                onChange={(e) => setLeadCity(e.target.value)}
+                className="w-full h-[38px] rounded-lg bg-surface-container-low border border-border-subtle px-3 text-xs text-content-primary focus:border-primary focus:outline-none"
               >
-                <X className="w-4 h-4" />
-              </button>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Chennai">Chennai</option>
+                <option value="NCR">NCR (Gurugram/Noida)</option>
+                <option value="Coimbatore">Coimbatore</option>
+              </select>
             </div>
 
-            {leadSuccessMsg ? (
-              <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>{leadSuccessMsg}</span>
-              </div>
-            ) : (
-              <form onSubmit={handleLeadSubmit} className="space-y-3.5">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={leadCompany}
-                    onChange={(e) => setLeadCompany(e.target.value)}
-                    placeholder="e.g. Acme Tech Solutions India"
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      City *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={leadCity}
-                      onChange={(e) => setLeadCity(e.target.value)}
-                      placeholder="e.g. Hyderabad"
-                      className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Status
-                    </label>
-                    <select
-                      value={leadStatus}
-                      onChange={(e) => setLeadStatus(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
-                    >
-                      <option value="announced">Announced</option>
-                      <option value="landed">Landed</option>
-                      <option value="expanding">Expanding</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Supporting Source Link (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={leadUrl}
-                    onChange={(e) => setLeadUrl(e.target.value)}
-                    placeholder="https://... (http/https only; others sanitized)"
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
-                  />
-                  <p className="text-[10px] text-slate-400 mt-1">
-                    Only http and https links are accepted. Leads start at Grade D (Unreviewed).
-                  </p>
-                </div>
-
-                <div className="pt-2 flex justify-end gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setLeadModalOpen(false)}
-                    className="px-3.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={submittingLead}
-                    className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-slate-800 disabled:opacity-50"
-                  >
-                    {submittingLead ? "Submitting..." : "Submit to Review Queue"}
-                  </button>
-                </div>
-              </form>
-            )}
+            <div>
+              <label className="block text-xs font-geist font-medium text-content-secondary uppercase tracking-wider mb-1.5">
+                Establishment Status
+              </label>
+              <select
+                value={leadStatus}
+                onChange={(e) => setLeadStatus(e.target.value)}
+                className="w-full h-[38px] rounded-lg bg-surface-container-low border border-border-subtle px-3 text-xs text-content-primary focus:border-primary focus:outline-none"
+              >
+                <option value="announced">Announced (Signal only)</option>
+                <option value="landed">Landed (Operational)</option>
+                <option value="expanding">Expanding (Scale phase)</option>
+              </select>
+            </div>
           </div>
-        </div>
-      )}
+
+          <Input
+            label="Public Evidence URL (Optional)"
+            type="url"
+            value={leadUrl}
+            onChange={(e) => setLeadUrl(e.target.value)}
+            placeholder="https://mca.gov.in/... or official press link"
+            helperText="Only secure HTTP/HTTPS source links are stored."
+          />
+
+          <div className="flex justify-end gap-3 pt-3 border-t border-border-subtle">
+            <Button variant="ghost" type="button" onClick={() => setLeadModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" loading={submittingLead}>
+              Submit for Review
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

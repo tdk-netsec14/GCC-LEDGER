@@ -17,12 +17,14 @@ import {
   MapPin,
   Menu,
   Radio,
+  Home,
   ShieldCheck,
   X,
 } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/", label: "Ledger", icon: BarChart3 },
+  { href: "/", label: "Overview", icon: Home },
+  { href: "/ledger", label: "Ledger", icon: BarChart3 },
   { href: "/directory", label: "Directory", icon: Building2 },
   { href: "/cities", label: "City Lab", icon: MapPin },
   { href: "/simulate", label: "Setup Simulator", icon: Compass },
