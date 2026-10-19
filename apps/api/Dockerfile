@@ -7,10 +7,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml ./
+COPY apps/api/pyproject.toml ./
 RUN pip install --no-cache-dir .
 
-COPY . .
+COPY apps/api/ ./
+COPY data/ /app/data/
 
 RUN chmod +x /app/entrypoint.sh
 

@@ -1,6 +1,8 @@
 services:
   api:
-    build: ./apps/api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
     environment:
       DATABASE_URL: sqlite:////var/lib/gcc-ledger/gcc_ledger.db
       VECTOR_INDEX_PATH: /var/lib/gcc-ledger/vector_index
