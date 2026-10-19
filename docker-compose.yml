@@ -13,7 +13,7 @@ services:
       LLM_PROVIDER: ${LLM_PROVIDER:-mock}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
     ports:
-      - "${API_PORT:-8000}:8000"
+      - "${API_PORT:-8000}:${PORT:-8000}"
     volumes:
       - ledger_data:/var/lib/gcc-ledger
       - ./data:/app/data

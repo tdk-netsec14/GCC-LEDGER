@@ -16,6 +16,11 @@ settings = get_settings()
 db_url = settings.database_url
 connect_args = {}
 
+if db_url.startswith("postgres://"):
+    db_url = "postgresql+psycopg://" + db_url.removeprefix("postgres://")
+elif db_url.startswith("postgresql://"):
+    db_url = "postgresql+psycopg://" + db_url.removeprefix("postgresql://")
+
 if "sqlite" in db_url:
     connect_args = {"check_same_thread": False}
     # Resolve relative path against project root if needed

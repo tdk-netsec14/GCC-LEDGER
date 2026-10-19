@@ -1,0 +1,38 @@
+databases:
+  - name: gcc-ledger-db
+    databaseName: gcc_ledger
+    user: gcc_ledger
+    plan: basic-256mb
+
+services:
+  - type: web
+    name: gcc-ledger-api
+    runtime: docker
+    rootDir: apps/api
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gcc-ledger-db
+          property: connectionString
+      - key: VECTOR_INDEX_PATH
+        value: /var/lib/gcc-ledger/vector_index
+      - key: LLM_PROVIDER
+        value: openrouter
+      - key: OPENAI_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: OPENAI_MODEL
+        value: minimax/minimax-m3.1-flash:free
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ADMIN_JWT_SECRET
+        generateValue: true
+      - key: DAILY_LLM_BUDGET_USD
+        value: "1.00"
+      - key: FETCH_USER_AGENT
+        value: GCC-Ledger/1.0
+      - key: CORS_ORIGINS
+        sync: false

@@ -9,12 +9,12 @@ mkdir -p /app/data/snapshots
 
 # Run Alembic migrations
 echo "Applying database schema migrations..."
-alembic upgrade head || true
+alembic upgrade head
 
 # Run idempotent database seeder
 echo "Seeding database with verified regulatory figures..."
-python -m app.seed || true
+python -m app.seed
 
 # Start FastAPI application
 echo "Starting Uvicorn web server..."
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000
+exec uvicorn app.main:app --host 0.0.0.0 --port "${PORT:-8000}"
