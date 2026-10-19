@@ -85,7 +85,22 @@ const NAV_GROUPS: NavGroup[] = [
 export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { theme, resolvedTheme, toggleTheme } = useTheme();
+  const notifications = [
+    {
+      title: "Evidence floor updated",
+      message: "The active ledger view is filtered to the selected evidence grade.",
+    },
+    {
+      title: "Review queue available",
+      message: "Open the Reviewer Workspace to process pending submissions.",
+    },
+    {
+      title: "API status",
+      message: "Live data status is shown on each page after loading.",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-canvas text-content-primary font-sans flex flex-col">
@@ -273,12 +288,46 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <div className="relative">
               <button
                 type="button"
+                onClick={() => setNotificationsOpen((open) => !open)}
                 className="p-2 rounded-lg text-content-secondary hover:text-content-primary hover:bg-surface-container-high transition-colors"
                 aria-label="Notifications"
+                aria-expanded={notificationsOpen}
+                aria-haspopup="dialog"
               >
                 <Bell className="w-4 h-4" />
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-tertiary" />
+                <span
+                  className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-tertiary"
+                  aria-label="Unread notifications"
+                />
               </button>
+              {notificationsOpen && (
+                <div
+                  role="dialog"
+                  aria-label="Notifications panel"
+                  className="absolute right-0 top-11 z-50 w-80 rounded-xl border border-border-subtle bg-surface-card-elevated p-3 shadow-elevated"
+                >
+                  <div className="flex items-center justify-between border-b border-border-subtle pb-2">
+                    <h2 className="text-xs font-semibold text-content-primary">Notifications</h2>
+                    <button
+                      type="button"
+                      onClick={() => setNotificationsOpen(false)}
+                      className="text-[11px] text-content-muted hover:text-content-primary"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div className="divide-y divide-border-subtle">
+                    {notifications.map((notification) => (
+                      <div key={notification.title} className="py-3">
+                        <p className="text-xs font-medium text-content-primary">{notification.title}</p>
+                        <p className="mt-1 text-[11px] leading-relaxed text-content-secondary">
+                          {notification.message}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* User Avatar */}
