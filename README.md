@@ -75,7 +75,7 @@ All calculations are performed by deterministic code with strict typing. The LLM
 
 1. **Install backend dependencies:**
    ```bash
-   pip install -r apps/api/requirements.txt
+   pip install -e "apps/api[dev]"
    ```
 
 2. **Install frontend dependencies:**
